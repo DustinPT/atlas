@@ -37,7 +37,7 @@ public class AtlasHttpServlet extends HttpServlet {
     protected void includeResponse(HttpServletRequest request, HttpServletResponse response, String template) {
         try {
             response.setContentType(TEXT_HTML);
-            response.setHeader(XFRAME_OPTION, DENY);
+//            response.setHeader(XFRAME_OPTION, DENY);
             ServletContext context = getServletContext();
             RequestDispatcher rd = context.getRequestDispatcher(template);
             rd.include(request, response);

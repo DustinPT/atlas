@@ -50,7 +50,7 @@ public class HeadersUtil {
     public static final int SC_AUTHENTICATION_TIMEOUT = 419;
 
     HeadersUtil() {
-        headerMap.put(X_FRAME_OPTIONS_KEY, X_FRAME_OPTIONS_VAL);
+//        headerMap.put(X_FRAME_OPTIONS_KEY, X_FRAME_OPTIONS_VAL);
         headerMap.put(X_CONTENT_TYPE_OPTIONS_KEY, X_CONTENT_TYPE_OPTIONS_VAL);
         headerMap.put(X_XSS_PROTECTION_KEY, X_XSS_PROTECTION_VAL);
         headerMap.put(STRICT_TRANSPORT_SEC_KEY, STRICT_TRANSPORT_SEC_VAL);
@@ -59,8 +59,10 @@ public class HeadersUtil {
     }
 
     public static void setHeaderMapAttributes(AtlasResponseRequestWrapper responseWrapper, String headerKey) {
-        responseWrapper.setHeader(headerKey, headerMap.get(headerKey));
-
+        String value=headerMap.get(headerKey);
+        if(value!=null){
+            responseWrapper.setHeader(headerKey, headerMap.get(headerKey));
+        }
     }
 
     public static void setSecurityHeaders(AtlasResponseRequestWrapper responseWrapper) {

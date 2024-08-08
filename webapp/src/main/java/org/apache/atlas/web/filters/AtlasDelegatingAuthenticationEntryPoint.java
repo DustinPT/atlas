@@ -45,7 +45,7 @@ public class AtlasDelegatingAuthenticationEntryPoint extends DelegatingAuthentic
                          AuthenticationException authException) throws IOException {
 
         String ajaxRequestHeader = request.getHeader(HeadersUtil.X_REQUESTED_WITH_KEY);
-        response.setHeader(HeadersUtil.X_FRAME_OPTIONS_KEY, HeadersUtil.X_FRAME_OPTIONS_VAL);
+//        response.setHeader(HeadersUtil.X_FRAME_OPTIONS_KEY, HeadersUtil.X_FRAME_OPTIONS_VAL);
 
         if (ajaxRequestHeader != null
                 && HeadersUtil.X_REQUESTED_WITH_VALUE.equalsIgnoreCase(ajaxRequestHeader)) {

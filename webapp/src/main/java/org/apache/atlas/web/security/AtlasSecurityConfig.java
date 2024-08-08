@@ -43,14 +43,26 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.core.io.Resource;
+import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.annotation.web.configurers.HeadersConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.config.oauth2.client.CommonOAuth2Provider;
 import org.springframework.security.core.session.SessionRegistryImpl;
+import org.springframework.security.oauth2.client.InMemoryOAuth2AuthorizedClientService;
+import org.springframework.security.oauth2.client.OAuth2AuthorizedClientService;
+import org.springframework.security.oauth2.client.registration.ClientRegistration;
+import org.springframework.security.oauth2.client.registration.ClientRegistrationRepository;
+import org.springframework.security.oauth2.client.registration.InMemoryClientRegistrationRepository;
+import org.springframework.security.oauth2.client.web.AuthenticatedPrincipalOAuth2AuthorizedClientRepository;
+import org.springframework.security.oauth2.client.web.OAuth2AuthorizedClientRepository;
+import org.springframework.security.oauth2.core.AuthorizationGrantType;
+import org.springframework.security.oauth2.core.ClientAuthenticationMethod;
 import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.security.web.authentication.DelegatingAuthenticationEntryPoint;
 import org.springframework.security.web.authentication.logout.LogoutFilter;
@@ -103,6 +115,8 @@ public class AtlasSecurityConfig extends WebSecurityConfigurerAdapter {
     private KeycloakConfigResolver keycloakConfigResolver;
 
     private final boolean keycloakEnabled;
+    
+    private final boolean oauth2Enabled;
 
     @Inject
     public AtlasSecurityConfig(AtlasKnoxSSOAuthenticationFilter ssoAuthenticationFilter,
@@ -127,6 +141,8 @@ public class AtlasSecurityConfig extends WebSecurityConfigurerAdapter {
         this.activeServerFilter = activeServerFilter;
 
         this.keycloakEnabled = configuration.getBoolean(AtlasAuthenticationProvider.KEYCLOAK_AUTH_METHOD, false);
+        this.oauth2Enabled=configuration.getBoolean("atlas.authentication.method.oauth2", false);
+        
     }
 
     public AuthenticationEntryPoint getAuthenticationEntryPoint() throws Exception {
@@ -187,6 +203,7 @@ public class AtlasSecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests().anyRequest().authenticated()
                 .and()
                     .headers()
+                .frameOptions(HeadersConfigurer.FrameOptionsConfig::disable)
                 .addHeaderWriter(new StaticHeadersWriter(HeadersUtil.CONTENT_SEC_POLICY_KEY, HeadersUtil.headerMap.get(HeadersUtil.CONTENT_SEC_POLICY_KEY)))
                 .addHeaderWriter(new StaticHeadersWriter(SERVER_KEY, HeadersUtil.headerMap.get(SERVER_KEY)))
                         .and()
@@ -213,7 +230,9 @@ public class AtlasSecurityConfig extends WebSecurityConfigurerAdapter {
                     .logout()
                         .logoutSuccessUrl("/login.jsp")
                         .deleteCookies("ATLASSESSIONID")
-                        .logoutUrl("/logout.html");
+                        .logoutUrl("/logout.html")
+                .and().exceptionHandling()
+                .authenticationEntryPoint(atlasAuthenticationEntryPoint);
 
         //@formatter:on
 
@@ -240,6 +259,10 @@ public class AtlasSecurityConfig extends WebSecurityConfigurerAdapter {
               .addFilterBefore(keycloakPreAuthActionsFilter(), LogoutFilter.class)
               .addFilterAfter(keycloakSecurityContextRequestFilter(), SecurityContextHolderAwareRequestFilter.class)
               .addFilterAfter(keycloakAuthenticatedActionsRequestFilter(), KeycloakSecurityContextRequestFilter.class);
+        }
+        if(oauth2Enabled){
+            httpSecurity.oauth2Login()
+                    .clientRegistrationRepository(new InMemoryClientRegistrationRepository(oauth2ClientRegistration()));
         }
     }
 
@@ -308,5 +331,38 @@ public class AtlasSecurityConfig extends WebSecurityConfigurerAdapter {
         KeycloakAuthenticationProcessingFilter filter = new KeycloakAuthenticationProcessingFilter(authenticationManagerBean(), KEYCLOAK_REQUEST_MATCHER);
         filter.setSessionAuthenticationStrategy(sessionAuthenticationStrategy());
         return filter;
+    }
+
+//    public ClientRegistrationRepository clientRegistrationRepository() {
+//        return new InMemoryClientRegistrationRepository(oauth2ClientRegistration());
+//    }
+
+//    @Bean
+//    public OAuth2AuthorizedClientService authorizedClientService(
+//            ClientRegistrationRepository clientRegistrationRepository) {
+//        return new InMemoryOAuth2AuthorizedClientService(clientRegistrationRepository);
+//    }
+//
+//    @Bean
+//    public OAuth2AuthorizedClientRepository authorizedClientRepository(
+//            OAuth2AuthorizedClientService authorizedClientService) {
+//        return new AuthenticatedPrincipalOAuth2AuthorizedClientRepository(authorizedClientService);
+//    }
+
+    private ClientRegistration oauth2ClientRegistration() {
+        Configuration clientConf=configuration.subset("atlas.authentication.method.oauth2.client_registration");
+        ClientRegistration.Builder builder = ClientRegistration.withRegistrationId(clientConf.getString("registration_id"));
+        builder.clientAuthenticationMethod(ClientAuthenticationMethod.CLIENT_SECRET_BASIC);
+        builder.authorizationGrantType(AuthorizationGrantType.AUTHORIZATION_CODE);
+        builder.redirectUri("{baseUrl}/{action}/oauth2/code/{registrationId}");
+        builder.scope(clientConf.getString("scope"));
+        builder.authorizationUri(clientConf.getString("authorization_uri"));
+        builder.tokenUri(clientConf.getString("token_uri"));
+        builder.userInfoUri(clientConf.getString("user_info_uri"));
+        builder.userNameAttributeName(clientConf.getString("user_name_attribute_name"));
+        builder.clientName(clientConf.getString("client_name"));
+        builder.clientId(clientConf.getString("client_id"));
+        builder.clientSecret(clientConf.getString("client_secret"));
+        return builder.build();
     }
 }

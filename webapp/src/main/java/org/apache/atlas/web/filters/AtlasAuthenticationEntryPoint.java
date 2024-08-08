@@ -16,6 +16,7 @@
  */
 package org.apache.atlas.web.filters;
 
+import org.apache.commons.configuration.Configuration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -37,9 +38,15 @@ public class AtlasAuthenticationEntryPoint extends LoginUrlAuthenticationEntryPo
 
     private String loginPath = "/login.jsp";
 
+    private String ssoPath;
+
     @Inject
-    public AtlasAuthenticationEntryPoint(@Value("/login.jsp") String loginFormUrl) {
+    public AtlasAuthenticationEntryPoint(@Value("/login.jsp") String loginFormUrl,Configuration configuration) {
         super(loginFormUrl);
+        boolean oauth2Enabled=configuration.getBoolean("atlas.authentication.method.oauth2", false);
+        if(oauth2Enabled){
+            ssoPath="/oauth2/authorization/"+configuration.getString("atlas.authentication.method.oauth2.client_registration.registration_id");
+        }
     }
 
     @Override
@@ -48,13 +55,18 @@ public class AtlasAuthenticationEntryPoint extends LoginUrlAuthenticationEntryPo
 
 
         String ajaxRequestHeader = request.getHeader("X-Requested-With");
-        response.setHeader("X-Frame-Options", "DENY");
+//        response.setHeader("X-Frame-Options", "DENY");
 
         if ("XMLHttpRequest".equals(ajaxRequestHeader)) {
             response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
         } else {
-            LOG.debug("redirecting to login page loginPath" + loginPath);
-            response.sendRedirect(loginPath);
+            if (ssoPath==null||request.getParameter("nosso")==null) {
+                LOG.debug("redirecting to login page ssoPath" + ssoPath);
+                response.sendRedirect(ssoPath);
+            } else {
+                LOG.debug("redirecting to login page loginPath" + loginPath);
+                response.sendRedirect(loginPath);
+            }
         }
     }
 }
