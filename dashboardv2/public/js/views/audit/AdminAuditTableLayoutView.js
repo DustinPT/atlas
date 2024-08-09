@@ -100,7 +100,7 @@ define(['require',
                             saveState: false
                         },
                         visibilityControlOpts: {
-                            buttonTemplate: _.template("<button class='btn btn-action btn-sm pull-right'>Columns&nbsp<i class='fa fa-caret-down'></i></button>")
+                            buttonTemplate: _.template("<button class='btn btn-action btn-sm pull-right'>"+Utils.tt('Columns')+"&nbsp<i class='fa fa-caret-down'></i></button>")
                         },
                         el: this.ui.colManager
                     },
@@ -110,7 +110,7 @@ define(['require',
                         fetchCollection: this.getAdminCollection.bind(this),
                     },
                     gridOpts: {
-                        emptyText: 'No Record found!',
+                        emptyText: Utils.tt('No Record found!'),
                         className: 'table table-hover backgrid table-quickMenu colSort'
                     },
                     filterOpts: {},
@@ -256,25 +256,25 @@ define(['require',
                         }
                     },
                     userName: {
-                        label: "Users",
+                        label: Utils.tt("Users"),
                         cell: "html",
                         renderable: true,
                         editable: false
                     },
                     operation: {
-                        label: "Operation",
+                        label: Utils.tt("Operation"),
                         cell: "String",
                         renderable: true,
                         editable: false
                     },
                     clientId: {
-                        label: "Client ID",
+                        label: Utils.tt("Client ID"),
                         cell: "String",
                         renderable: true,
                         editable: false
                     },
                     resultCount: {
-                        label: "Result Count",
+                        label: Utils.tt("Result Count"),
                         cell: "String",
                         renderable: true,
                         editable: false,
@@ -289,7 +289,7 @@ define(['require',
                         })
                     },
                     startTime: {
-                        label: "Start Time",
+                        label: Utils.tt("Start Time"),
                         cell: "html",
                         renderable: true,
                         editable: false,
@@ -300,7 +300,7 @@ define(['require',
                         })
                     },
                     endTime: {
-                        label: "End Time",
+                        label: Utils.tt("End Time"),
                         cell: "html",
                         renderable: true,
                         editable: false,
@@ -311,7 +311,7 @@ define(['require',
                         })
                     },
                     duration: {
-                        label: "Duration",
+                        label: Utils.tt("Duration"),
                         cell: "html",
                         renderable: false,
                         editable: false,

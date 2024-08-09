@@ -77,6 +77,7 @@ module.exports = function(grunt) {
                 },
                 files: {
                     // FileName : {"src":"dest"}
+                    'i18njs.js': {'i18njs/dist':'i18njs'},
                     'jquery.min.js': { 'jquery/dist': 'jquery/js' },
                     'require.js': { 'requirejs': 'requirejs' },
                     'text.js': { 'requirejs-text': 'requirejs-text' },
@@ -104,6 +105,7 @@ module.exports = function(grunt) {
                     'jquery.placeholder.js': { 'jquery-placeholder': 'jquery-placeholder/js' },
                     'platform.js': { 'platform': 'platform' },
                     'query-builder.standalone.min.js': { 'jQuery-QueryBuilder/dist/js': 'jQueryQueryBuilder/js' },
+                    'query-builder.zh-CN.js': { 'jQuery-QueryBuilder/dist/i18n': 'jQueryQueryBuilder/i18n' },
                     'daterangepicker.js': { 'bootstrap-daterangepicker': 'bootstrap-daterangepicker/js' },
                     'jquery.sparkline.min.js': { 'jquery-sparkline': 'sparkline' },
                     'table-dragger.js': { 'table-dragger/dist': 'table-dragger' },

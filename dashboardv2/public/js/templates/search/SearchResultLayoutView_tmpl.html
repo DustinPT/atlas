@@ -66,12 +66,12 @@
                 </div>
             </div>
             <div id="r_searchResultTableLayoutView">
-                {{#if isSearchTab}}<h1><b>{{searchType}}</b></h1>{{/if}}
+                {{#if isSearchTab}}<h1><b>{{tt searchType}}</b></h1>{{/if}}
                 <div class="entityLink" style="display:none">
-                    <p class="entityLink">Search Atlas for existing entities
+                    <p class="entityLink">{{tt 'Search Atlas for existing entities'}}
                         {{#if entityCreate}}
-                        or
-                        <a href="javascript:void(0)" data-id='createEntity'> create new entity </a>
+                        {{tt 'or'}}
+                        <a href="javascript:void(0)" data-id='createEntity'> {{tt 'create new entity'}} </a>
                         {{/if}}
                     </p>
                 </div>

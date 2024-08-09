@@ -82,7 +82,7 @@ define(['require',
                     includeColumnManager: true,
                     gridOpts: {
                         className: "table table-hover backgrid table-quickMenu",
-                        emptyText: 'No records found!'
+                        emptyText: Utils.tt('No records found!')
                     },
                     columnOpts: {
                         opts: {
@@ -90,7 +90,7 @@ define(['require',
                             saveState: false
                         },
                         visibilityControlOpts: {
-                            buttonTemplate: _.template("<button class='btn btn-action btn-sm pull-right'>Columns&nbsp<i class='fa fa-caret-down'></i></button>")
+                            buttonTemplate: _.template("<button class='btn btn-action btn-sm pull-right'>"+Utils.tt('Columns')+"&nbsp<i class='fa fa-caret-down'></i></button>")
                         },
                         el: this.ui.colManager
                     },
@@ -282,7 +282,7 @@ define(['require',
                         }
                     },
                     name: {
-                        label: "Name",
+                        label: Utils.tt("Name"),
                         cell: "html",
                         editable: false,
                         formatter: _.extend({}, Backgrid.CellFormatter.prototype, {
@@ -292,7 +292,7 @@ define(['require',
                         })
                     },
                     description: {
-                        label: "Description",
+                        label: Utils.tt("Description"),
                         cell: "html",
                         editable: false,
                         formatter: _.extend({}, Backgrid.CellFormatter.prototype, {
@@ -306,7 +306,7 @@ define(['require',
                         })
                     },
                     createdBy: {
-                        label: "Created by",
+                        label: Utils.tt("Created by"),
                         cell: "html",
                         renderable: false,
                         editable: false,
@@ -317,7 +317,7 @@ define(['require',
                         })
                     },
                     createTime: {
-                        label: "Created on",
+                        label: Utils.tt("Created on"),
                         cell: "html",
                         renderable: false,
                         editable: false,
@@ -328,7 +328,7 @@ define(['require',
                         })
                     },
                     updatedBy: {
-                        label: "Updated by",
+                        label: Utils.tt("Updated by"),
                         cell: "html",
                         renderable: false,
                         editable: false,
@@ -339,7 +339,7 @@ define(['require',
                         })
                     },
                     updateTime: {
-                        label: "Updated on",
+                        label: Utils.tt("Updated on"),
                         cell: "html",
                         renderable: false,
                         editable: false,
@@ -350,7 +350,7 @@ define(['require',
                         })
                     },
                     tools: {
-                        label: "Action",
+                        label: Utils.tt("Action"),
                         cell: "html",
                         sortable: false,
                         editable: false,

@@ -37,10 +37,10 @@
     <div class="panel panel-default custom-panel expand_collapse_panel-icon" data-id="entity">
         <div class="panel-heading" data-toggle="collapse" href="#entityCountCollapse" aria-expanded="true">
             <h4 class="panel-title">
-                <a>Entities <span class="count">(0)</span></a>
+                <a>{{tt 'Entities'}} <span class="count">(0)</span></a>
             </h4>
             <div class="btn-group pull-left">
-                <button type="button" title="Collapse"><i class="ec-icon fa"></i></button>
+                <button type="button" title="{{tt 'Collapse'}}"><i class="ec-icon fa"></i></button>
             </div>
         </div>
         <div id="entityCountCollapse" class="panel-collapse collapse in">
@@ -48,7 +48,7 @@
                 <table class="table table-hover stat-table entityTable" data-id="entity-card">
                     <tbody>
                         <tr class="empty text-center">
-                            <td colspan="3"><span>No records found!</span></td>
+                            <td colspan="3"><span>{{tt 'No records found!'}}</span></td>
                         </tr>
                     </tbody>
                 </table>
@@ -86,10 +86,10 @@
     <div class="panel panel-default custom-panel expand_collapse_panel-icon" data-id="classification">
         <div class="panel-heading" data-toggle="collapse" href="#classificationCountCollapse" aria-expanded="true">
             <h4 class="panel-title">
-                <a>Classifications <span class="count">(0)</span></a>
+                <a>{{tt 'Classifications'}} <span class="count">(0)</span></a>
             </h4>
             <div class="btn-group pull-left">
-                <button type="button" title="Collapse"><i class="ec-icon fa"></i></button>
+                <button type="button" title="{{tt 'Collapse'}}"><i class="ec-icon fa"></i></button>
             </div>
         </div>
         <div id="classificationCountCollapse" class="panel-collapse collapse in">
@@ -97,13 +97,13 @@
                 <table class="table stat-table classificationTable">
                     <thead>
                         <tr>
-                            <th class="">Name</th>
-                            <th class="">Count <span class="count">(0)</span></th>
+                            <th class="">{{tt 'Name'}}</th>
+                            <th class="">{{tt 'Count'}} <span class="count">(0)</span></th>
                         </tr>
                     </thead>
                     <tbody data-id="classification-card">
                         <tr class="empty text-center">
-                            <td colspan="3"><span>No records found!</span></td>
+                            <td colspan="3"><span>{{tt 'No records found!'}}</span></td>
                         </tr>
                     </tbody>
                 </table>
@@ -113,22 +113,22 @@
     <div class="panel panel-default custom-panel expand_collapse_panel-icon" data-id="stats">
         <div class="panel-heading" data-toggle="collapse" href="#serverDetailcollapse" aria-expanded="true">
             <h4 class="panel-title">
-                <a>Server Statistics </a>
+                <a>{{tt 'Server Statistics'}} </a>
             </h4>
             <div class="btn-group pull-left">
-                <button type="button" title="Collapse"><i class="ec-icon fa"></i></button>
+                <button type="button" title="{{tt 'Collapse'}}"><i class="ec-icon fa"></i></button>
             </div>
         </div>
         <div id="serverDetailcollapse" class="panel-collapse collapse in">
             <div class="panel-body">
                 <div class="col-sm-12">
                     <div class="card-container panel panel-primary">
-                        <div class="panel-heading">Server Details</div>
+                        <div class="panel-heading">{{tt 'Server Details'}}</div>
                         <div class="panel-body">
                             <table class="table stat-table">
                                 <tbody data-id="server-card">
                                     <tr class="empty text-center">
-                                        <td colspan="2"><span>No records found!</span></td>
+                                        <td colspan="2"><span>{{tt 'No records found!'}}</span></td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -137,12 +137,12 @@
                 </div>
                 <div class="col-sm-12">
                     <div class="card-container panel panel-primary hide" data-id="notificationDetails">
-                        <div class="panel-heading">Notification Details</div>
+                        <div class="panel-heading">{{tt 'Notification Details'}}</div>
                         <div class="panel-body">
                             <table data-id="offset-card" class="table stat-table notification-table table-striped ">
                                 <tbody>
                                     <tr class="empty text-center">
-                                        <td colspan="2"><span>No records found!</span></td>
+                                        <td colspan="2"><span>{{tt 'No records found!'}}</span></td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -151,7 +151,7 @@
                             <table data-id="notification-card" class="table stat-table notification-table table-striped ">
                                 <tbody>
                                     <tr class="empty text-center">
-                                        <td colspan="2"><span>No records found!</span></td>
+                                        <td colspan="2"><span>{{tt 'No records found!'}}</span></td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -164,22 +164,22 @@
     <div class="panel panel-default custom-panel expand_collapse_panel-icon" data-id="systemDetails">
         <div class="panel-heading" data-toggle="collapse" href="#systemDetailCollapse" aria-expanded="false">
             <h4 class="panel-title">
-                <a>System Details</a>
+                <a>{{tt 'System Details'}}</a>
             </h4>
             <div class="btn-group pull-left">
-                <button type="button" title="Collapse"><i class="ec-icon fa"></i></button>
+                <button type="button" title="{{tt 'Collapse'}}"><i class="ec-icon fa"></i></button>
             </div>
         </div>
         <div id="systemDetailCollapse" class="panel-collapse collapse">
             <div class="panel-body">
                 <div class="col-sm-6">
                     <div class="card-container panel panel-primary">
-                        <div class="panel-heading">OS</div>
+                        <div class="panel-heading">{{tt 'OS'}}</div>
                         <div class="panel-body">
                             <table class="table stat-table">
                                 <tbody data-id="os-card">
                                     <tr class="empty text-center">
-                                        <td colspan="2"><span>No records found!</span></td>
+                                        <td colspan="2"><span>{{tt 'No records found!'}}</span></td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -188,12 +188,12 @@
                 </div>
                 <div class="col-sm-6">
                     <div class="card-container panel panel-primary">
-                        <div class="panel-heading">Runtime</div>
+                        <div class="panel-heading">{{tt 'Runtime'}}</div>
                         <div class="panel-body">
                             <table class="table stat-table">
                                 <tbody data-id="runtime-card">
                                     <tr class="empty text-center">
-                                        <td colspan="2"><span>No records found!</span></td>
+                                        <td colspan="2"><span>{{tt 'No records found!'}}</span></td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -202,12 +202,12 @@
                 </div>
                 <div class="col-sm-12">
                     <div class="card-container panel panel-primary">
-                        <div class="panel-heading">Memory</div>
+                        <div class="panel-heading">{{tt 'Memory'}}</div>
                         <div class="panel-body">
                             <table class="table stat-table memory-details">
                                 <tbody data-id="memory-card">
                                     <tr class="empty text-center">
-                                        <td colspan="2"><span>No records found!</span></td>
+                                        <td colspan="2"><span>{{tt 'No records found!'}}</span></td>
                                     </tr>
                                 </tbody>
                             </table>

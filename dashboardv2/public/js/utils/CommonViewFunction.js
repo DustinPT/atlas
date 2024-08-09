@@ -345,7 +345,7 @@ define(['require', 'utils/Utils', 'modules/Modal', 'utils/Messages', 'utils/Enum
             }
 
         });
-        return table && table.length > 0 ? table : '<tr class="empty"><td colspan="22"><span>No Record found!</span></td></tr>';
+        return table && table.length > 0 ? table : '<tr class="empty"><td colspan="22"><span>'+Utils.tt('No Record found!')+'</span></td></tr>';
     }
     CommonViewFunction.tagForTable = function(obj, classificationDefCollection) {
         var traits = obj.classifications,

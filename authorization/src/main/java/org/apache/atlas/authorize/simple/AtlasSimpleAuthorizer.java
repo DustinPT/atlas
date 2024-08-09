@@ -51,7 +51,7 @@ import static org.apache.atlas.authorize.AtlasPrivilege.TYPE_READ;
 import static org.apache.atlas.authorize.AtlasPrivilege.TYPE_UPDATE;
 
 
-public final class AtlasSimpleAuthorizer implements AtlasAuthorizer {
+public class AtlasSimpleAuthorizer implements AtlasAuthorizer {
     private static final Logger LOG = LoggerFactory.getLogger(AtlasSimpleAuthorizer.class);
 
     private final static String WILDCARD_ASTERISK = "*";
@@ -338,7 +338,7 @@ public final class AtlasSimpleAuthorizer implements AtlasAuthorizer {
         filterTypes(request, typesDef.getBusinessMetadataDefs());
     }
 
-    private Set<String> getRoles(String userName, Set<String> userGroups) {
+    protected Set<String> getRoles(String userName, Set<String> userGroups) {
         Set<String> ret = new HashSet<>();
 
         if (authzPolicy != null) {

@@ -16,11 +16,16 @@
  * limitations under the License.
  */
 
-define(['require', 'utils/Globals', 'pnotify', 'utils/Messages', 'utils/Enums', 'moment', 'store', 'modules/Modal', 'DOMPurify', 'moment-timezone', 'pnotify.buttons', 'pnotify.confirm', 'trumbowyg'], function(require, Globals, pnotify, Messages, Enums, moment, store, Modal, DOMPurify) {
+define(['require', 'utils/Globals', 'pnotify', 'utils/Messages', 'utils/Enums', 'moment', 'store', 'modules/Modal', 'DOMPurify', 'modules/i18n', 'moment-timezone', 'pnotify.buttons', 'pnotify.confirm', 'trumbowyg'], function(require, Globals, pnotify, Messages, Enums, moment, store, Modal, DOMPurify, i18n) {
     'use strict';
 
     var Utils = {};
     var prevNetworkErrorTime = 0;
+
+    Utils.tt = function () {
+        // i18n.get(key[, data, options][, lang]);
+        return i18n.get.apply(i18n, arguments);
+    }
 
     Utils.generatePopover = function(options) {
         if (options.el) {

@@ -56,24 +56,24 @@ define(['require',
                 this.bindEvents();
                 var that = this;
                 this.modal = new Modal({
-                    title: 'Attribute Filter',
+                    title: Utils.tt('Attribute Filter'),
                     content: this,
                     allowCancel: true,
                     mainClass: 'modal-lg',
                     okCloses: false,
                     buttons: [{
-                            text: 'Cancel',
+                            text: Utils.tt('Cancel'),
                             btnClass: "cancel btn-action",
-                            title: 'Cancel'
+                            title: Utils.tt('Cancel')
                         }, {
-                            text: 'Apply',
+                            text: Utils.tt('Apply'),
                             btnClass: "ok btn-atlas",
-                            title: "Apply the filters and close popup (won't perform search)"
+                            title: Utils.tt("Apply the filters and close popup (won't perform search)")
                         },
                         {
-                            text: 'Search',
+                            text: Utils.tt('Search'),
                             btnClass: "ok search btn-atlas",
-                            title: 'Apply the filters and do search'
+                            title: Utils.tt('Apply the filters and do search')
                         }
                     ]
                 }).open();

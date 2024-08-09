@@ -104,11 +104,11 @@ define(['require',
                 rewind: null,
                 back: {
                     label: "<i class='fa fa-angle-left'></i>",
-                    title: "Previous"
+                    title: Utils.tt("Previous")
                 },
                 forward: {
                     label: "<i class='fa fa-angle-right'></i>",
-                    title: "Next"
+                    title: Utils.tt("Next")
                 },
                 fastForward: null
             },
@@ -462,9 +462,13 @@ define(['require',
                     this.pageTo = (this.offset + this.limit);
                     this.pageFrom = this.offset + 1;
                 }
-                this.ui.pageRecordText.html("Showing  <u>" + this.collection.length + " records</u> From " + this.pageFrom + " - " + this.pageTo);
+                this.ui.pageRecordText.html(Utils.tt('Showing <u>{{=total}} records</u> From {{=pageFrom}} - {{=pageTo}}',{
+                    total: this.collection.length,
+                    pageFrom: this.pageFrom,
+                    pageTo: this.pageTo
+                }));
                 this.activePage = Math.round(this.pageTo / this.limit);
-                this.ui.activePage.attr('title', "Page " + this.activePage);
+                this.ui.activePage.attr('title', Utils.tt('Page {{=pageNo}}',{pageNo:this.activePage}));
                 this.ui.activePage.text(this.activePage);
                 this.ui.showPage.val(this.limit).trigger('change', { "skipViewChange": true });
 
@@ -541,7 +545,10 @@ define(['require',
                 var totalRecords = collState.totalRecords || 0;
                 var pageStartIndex = totalRecords ? (collState.currentPage * collState.pageSize) : 0;
                 var pageEndIndex = pageStartIndex + this.collection.length;
-                this.$('[data-id="r_footerRecords"]').html('<h5>Showing ' + (totalRecords ? pageStartIndex + 1 : (this.collection.length === 0) ? 0 : 1) + ' - ' + pageEndIndex + '</h5>');
+                this.$('[data-id="r_footerRecords"]').html('<h5>' + Utils.tt('Showing {{=pageStartIndex}} - {{=pageEndIndex}}', {
+                    pageStartIndex: totalRecords ? pageStartIndex + 1 : (this.collection.length === 0) ? 0 : 1,
+                    pageEndIndex: pageEndIndex
+                }) + '</h5>');
                 return this;
             },
             /**

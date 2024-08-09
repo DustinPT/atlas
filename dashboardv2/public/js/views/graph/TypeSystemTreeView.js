@@ -479,7 +479,7 @@ define([
             this.ui.typeSearch
                 .select2({
                     closeOnSelect: true,
-                    placeholder: "Select Type"
+                    placeholder: Utils.tt("Select Type")
                 })
                 .on("change.select2", function(e) {
                     e.stopPropagation();
@@ -495,7 +495,7 @@ define([
                 this.ui.filterServiceType
                     .select2({
                         closeOnSelect: true,
-                        placeholder: "Select ServiceType"
+                        placeholder: Utils.tt("Select ServiceType")
                     })
                     .on("change.select2", function(e) {
                         e.stopPropagation();

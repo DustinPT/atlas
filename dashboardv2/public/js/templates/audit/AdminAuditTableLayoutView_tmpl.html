@@ -27,15 +27,15 @@
                     <i class="fa fa-refresh fa-spin-custom"></i>
                 </div>
                 <div class="attributeResultContainer form-group ">
-                    <button class="btn-action btn-sm  attribute-filter-text" data-id='adminAttrFilter'> <i class="fa fa-angle-right"></i> Filters</button>
+                    <button class="btn-action btn-sm  attribute-filter-text" data-id='adminAttrFilter'> <i class="fa fa-angle-right"></i> {{tt 'Filters'}}</button>
                     <div class="attribute-filter-container hide">
                         <div class="panel panel-default expand_collapse_panel-icon" data-id="adminRegion">
                             <div class="panel-heading" data-toggle="collapse" href="#collapseAdmin" aria-expanded="true">
                                 <h4 class="panel-title">
-                                    <a>Admin</a>
+                                    <a>{{tt 'Admin'}}</a>
                                 </h4>
                                 <div class="btn-group pull-right">
-                                    <button type="button" title="Collapse"><i class="ec-icon fa"></i></button>
+                                    <button type="button" title="{{tt 'Collapse'}}"><i class="ec-icon fa"></i></button>
                                 </div>
                             </div>
                             <div id="collapseAdmin" class="panel-collapse collapse in">
@@ -47,8 +47,8 @@
                             </div>
                         </div>
                         <div class='attribute-result-footer'>
-                            <div type="ok" class="btn btn-atlas ok search" data-id='attrApply'>Apply</div>
-                            <div type="ok" class="btn btn-atlas ok" data-id='attrClose'>Close</div>
+                            <div type="ok" class="btn btn-atlas ok search" data-id='attrApply'>{{tt 'Apply'}}</div>
+                            <div type="ok" class="btn btn-atlas ok" data-id='attrClose'>{{tt 'Close'}}</div>
                         </div>
                     </div>
                 </div>
@@ -64,7 +64,7 @@
                     <table class="table table-hover backgrid table-quickMenu">
                         <tbody>
                             <tr class="empty">
-                                <td colspan="16"><span>No Records found!</span></td>
+                                <td colspan="16"><span>{{tt 'No Records found!'}}</span></td>
                             </tr>
                         </tbody>
                     </table>

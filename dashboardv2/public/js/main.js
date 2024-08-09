@@ -144,6 +144,7 @@ require.config({
     },
 
     paths: {
+        'i18njs': 'libs/i18njs/i18njs',
         'jquery': 'libs/jquery/js/jquery.min',
         'underscore': 'libs/underscore/underscore-min',
         'bootstrap': 'libs/bootstrap/js/bootstrap.min',
@@ -180,6 +181,7 @@ require.config({
         'jquery-placeholder': 'libs/jquery-placeholder/js/jquery.placeholder',
         'platform': 'libs/platform/platform',
         'query-builder': 'libs/jQueryQueryBuilder/js/query-builder.standalone.min',
+        'query-builder.zh-CN': 'libs/jQueryQueryBuilder/i18n/query-builder.zh-CN',
         'daterangepicker': 'libs/bootstrap-daterangepicker/js/daterangepicker',
         'table-dragger': 'libs/table-dragger/table-dragger',
         'jstree': 'libs/jstree/jstree.min',

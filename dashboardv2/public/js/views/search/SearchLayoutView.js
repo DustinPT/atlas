@@ -628,7 +628,7 @@ define(['require',
                     }
                     that.ui.tagLov.html(tagStr);
                     this.ui.tagLov.select2({
-                        placeholder: "Select Classification",
+                        placeholder: Utils.tt("Select Classification"),
                         allowClear: true,
                         tags: true,
                         createTag: function(tag) {
@@ -686,7 +686,7 @@ define(['require',
                     return foundOptions;
                 };
                 this.ui.termLov.select2({
-                    placeholder: "Search Term",
+                    placeholder: Utils.tt("Search Term"),
                     allowClear: true,
                     ajax: {
                         url: UrlLinks.searchApiUrl('attribute'),

@@ -26,7 +26,8 @@ define(['require',
     'utils/Globals',
     'moment',
     'query-builder',
-    'daterangepicker'
+    'daterangepicker',
+    'query-builder.zh-CN'
 ], function(require, Backbone, QueryBuilderTmpl, UserDefineTmpl, Utils, CommonViewFunction, Enums, Globals, moment) {
 
     var QueryBuilderView = Backbone.Marionette.LayoutView.extend(
@@ -59,24 +60,24 @@ define(['require',
                 _.extend(this, _.pick(options, 'attrObj', 'value', 'typeHeaders', 'entityDefCollection', 'enumDefCollection', 'classificationDefCollection', 'businessMetadataDefCollection', 'tag', 'type', 'searchTableFilters', 'systemAttrArr', 'adminAttrFilters', 'relationship'));
                 this.attrObj = _.sortBy(this.attrObj, 'name');
                 this.filterType = this.tag ? 'tagFilters' : 'entityFilters';
-                this.defaultRange = "Last 7 Days";
+                this.defaultRange = Utils.tt("Last 7 Days");
                 if(this.relationship){
                     this.filterType = 'relationshipFilters';
                 }
                 this.dateRangesMap = {
-                    'Today': [moment(), moment()],
-                    'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
-                    'Last 7 Days': [moment().subtract(6, 'days'), moment()],
-                    'Last 30 Days': [moment().subtract(29, 'days'), moment()],
-                    'This Month': [moment().startOf('month'), moment().endOf('month')],
-                    'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')],
-                    'Last 3 Months': [moment().subtract(3, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')],
-                    'Last 6 Months': [moment().subtract(6, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')],
-                    'Last 12 Months': [moment().subtract(12, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')],
-                    'This Quarter': [moment().startOf('quarter'), moment().endOf('quarter')],
-                    'Last Quarter': [moment().subtract(1, 'quarter').startOf('quarter'), moment().subtract(1, 'quarter').endOf('quarter')],
-                    'This Year': [moment().startOf('year'), moment().endOf('year')],
-                    'Last Year': [moment().subtract(1, 'year').startOf('year'), moment().subtract(1, 'year').endOf('year')]
+                    [Utils.tt('Today')]: [moment(), moment()],
+                    [Utils.tt('Yesterday')]: [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+                    [Utils.tt('Last 7 Days')]: [moment().subtract(6, 'days'), moment()],
+                    [Utils.tt('Last 30 Days')]: [moment().subtract(29, 'days'), moment()],
+                    [Utils.tt('This Month')]: [moment().startOf('month'), moment().endOf('month')],
+                    [Utils.tt('Last Month')]: [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')],
+                    [Utils.tt('Last 3 Months')]: [moment().subtract(3, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')],
+                    [Utils.tt('Last 6 Months')]: [moment().subtract(6, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')],
+                    [Utils.tt('Last 12 Months')]: [moment().subtract(12, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')],
+                    [Utils.tt('This Quarter')]: [moment().startOf('quarter'), moment().endOf('quarter')],
+                    [Utils.tt('Last Quarter')]: [moment().subtract(1, 'quarter').startOf('quarter'), moment().subtract(1, 'quarter').endOf('quarter')],
+                    [Utils.tt('This Year')]: [moment().startOf('year'), moment().endOf('year')],
+                    [Utils.tt('Last Year')]: [moment().subtract(1, 'year').startOf('year'), moment().subtract(1, 'year').endOf('year')]
                 }
             },
             bindEvents: function() {},
@@ -140,7 +141,7 @@ define(['require',
                                 if (value instanceof Error) {
                                     return value.message; // with params
                                 } else {
-                                    return rule.filter.plainLabel + ' is required'; // with params
+                                    return Utils.tt('{{=plainLabel}} is required', {plainLabel: rule.filter.plainLabel}); // with params
                                 }
                             }
                         }
@@ -312,8 +313,40 @@ define(['require',
                         autoUpdateInput: false,
                         timePickerSeconds: true,
                         timePicker: true,
+                        timePicker24Hour: true,
                         locale: {
-                            format: Globals.dateTimeFormat
+                            format: Globals.dateTimeFormat,
+                            "separator": " - ",
+                            "applyLabel": Utils.tt("Apply"),
+                            "cancelLabel": Utils.tt("Cancel"),
+                            "fromLabel": Utils.tt("From"),
+                            "toLabel": Utils.tt("To"),
+                            "customRangeLabel": Utils.tt("Custom"),
+                            "weekLabel": Utils.tt("W"),
+                            "daysOfWeek": [
+                                Utils.tt("Su"),
+                                Utils.tt("Mo"),
+                                Utils.tt("Tu"),
+                                Utils.tt("We"),
+                                Utils.tt("Th"),
+                                Utils.tt("Fr"),
+                                Utils.tt("Sa")
+                            ],
+                            "monthNames": [
+                                Utils.tt("January"),
+                                Utils.tt("February"),
+                                Utils.tt("March"),
+                                Utils.tt("April"),
+                                Utils.tt("May"),
+                                Utils.tt("June"),
+                                Utils.tt("July"),
+                                Utils.tt("August"),
+                                Utils.tt("September"),
+                                Utils.tt("October"),
+                                Utils.tt("November"),
+                                Utils.tt("December")
+                            ],
+                            "firstDay": 1
                         }
                     };
 
@@ -387,7 +420,7 @@ define(['require',
                 var that = this,
                     filters = [],
                     isGroupView = true,
-                    placeHolder = '--Select Attribute--';
+                    placeHolder = Utils.tt('--Select Attribute--');
                 var rules_widgets = null;
                 if (this.adminAttrFilters) {
                     var entityDef = this.entityDefCollection.fullCollection.find({ name: "__AtlasAuditEntry" }),
@@ -530,13 +563,19 @@ define(['require',
                                 { type: 'not_null', nb_inputs: false, multiple: false, apply_to: ['number', 'string', 'boolean', 'enum'] },
                                 { type: 'TIME_RANGE', nb_inputs: 1, multiple: false, apply_to: ['date'] }
                             ],
+                            lang_code:'zh-CN',
                             lang: {
-                                add_rule: 'Add filter',
-                                add_group: 'Add filter group',
+                                add_rule: Utils.tt('Add filter'),
+                                add_group: Utils.tt('Add filter group'),
+                                delete_rule: Utils.tt('Delete'),
+                                delete_group: Utils.tt('Delete'),
                                 operators: {
-                                    not_null: 'is not null',
-                                    TIME_RANGE: "Time Range"
-                                }
+                                    not_null: Utils.tt('is not null'),
+                                    TIME_RANGE: Utils.tt("Time Range")
+                                },
+                                conditions: {
+                                    AND: Utils.tt('AND'),
+                                },
                             },
                             icons: {
                                 add_rule: 'fa fa-plus',
@@ -571,7 +610,7 @@ define(['require',
                     }
                     this.$('.rules-group-header .btn-group.pull-right.group-actions').toggleClass('pull-left');
                 } else {
-                    this.ui.builder.html('<h4>No Attributes are available !</h4>')
+                    this.ui.builder.html('<h4>'+Utils.tt('No Attributes are available !')+'</h4>')
                 }
             }
         });

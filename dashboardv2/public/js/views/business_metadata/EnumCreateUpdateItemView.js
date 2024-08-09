@@ -88,7 +88,7 @@ define(["require", "backbone", "hbs!tmpl/business_metadata/EnumCreateUpdateItemV
                 this.emumTypeSelectDisplay();
                 if (!this.options.closeModal) {
                     this.ui.enumCancleBtn.attr("disabled", "true");
-                    this.ui.enumCancleBtn.text("Clear");
+                    this.ui.enumCancleBtn.text(Utils.tt("Clear"));
                 }
             },
             bindEvents: function() {
@@ -113,7 +113,7 @@ define(["require", "backbone", "hbs!tmpl/business_metadata/EnumCreateUpdateItemV
                 this.ui.valueSelector.append(enumValues);
                 this.ui.valueSelector.val(selectedValues);
                 this.ui.valueSelector.select2({
-                    placeholder: "Select Enum value",
+                    placeholder: Utils.tt("Select Enum value"),
                     allowClear: false,
                     tags: true,
                     multiple: true
@@ -128,7 +128,7 @@ define(["require", "backbone", "hbs!tmpl/business_metadata/EnumCreateUpdateItemV
                 this.ui.enumSelector.append(enumTypes);
                 this.ui.enumSelector.val("");
                 this.ui.enumSelector.select2({
-                    placeholder: "Select Enum name",
+                    placeholder: Utils.tt("Select Enum name"),
                     tags: true,
                     allowClear: true,
                     multiple: false,

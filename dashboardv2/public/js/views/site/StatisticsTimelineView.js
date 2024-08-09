@@ -112,7 +112,7 @@ define(['require',
                     e.stopPropagation();
                     that.$el.find('.chart-button').removeClass('active');
                     $(e.currentTarget).addClass("active");
-                    that.metricsChartDateRange = $(e.currentTarget).children().text();
+                    that.metricsChartDateRange = $(e.currentTarget).children().data('day');
                     that.createMetricsChart();
 
                 };
@@ -123,7 +123,8 @@ define(['require',
                     selectedDateRange = that.dateRangesMap[that.metricsChartDateRange],
                     startTime = Date.parse(that.getValue({ value: selectedDateRange[0], type: "day" })),
                     endTime = Date.parse(that.getValue({ value: selectedDateRange[1], type: "day" }));
-                $(that.ui.chartTitle).text(that.entityType + " chart for " + that.dateRangeText[that.metricsChartDateRange]);
+                $(that.ui.chartTitle).text(Utils.tt('{{=entityType}} chart for {{=dateRangeText}}',
+                    {entityType: that.entityType, dateRangeText: Utils.tt(that.dateRangeText[that.metricsChartDateRange])}));
                 var options = {
                     "startTime": startTime,
                     "endTime": endTime,
@@ -389,7 +390,7 @@ define(['require',
             },
             createTimeLineDropdown: function(data) {
                 var that = this,
-                    options = '<option value="Current" data-name="Current" selected>Current</option>';
+                    options = '<option value="Current" data-name="Current" selected>'+Utils.tt('Current')+'</option>';
                 that.ui.metricsTimeList.empty();
                 _.each(data, function(data) {
                     var collectionTime = that.getValue({ type: "day", value: data.collectionTime });
@@ -400,10 +401,10 @@ define(['require',
             createChartTimeLineDropdown: function() {
                 var that = this,
                     options = '<ul class="pull-right">';
-                options += '<li class="chart-button"><a href="javascript:void(0);"  title="Last 1 day"  data-day="1d">1d</a></li>';
-                options += '<li class="chart-button active"><a href="javascript:void(0);"  title="Last 7 days"  data-day="7d">7d</a></li>';
-                options += '<li class="chart-button"><a href="javascript:void(0);"  title="Last 14 days"  data-day="14d">14d</a></li>';
-                options += '<li class="chart-button"><a href="javascript:void(0);"  title="Last 30 days"  data-day="30d">30d</a></li>';
+                options += '<li class="chart-button"><a href="javascript:void(0);"  title="'+Utils.tt('Last 1 day')+'"  data-day="1d">'+Utils.tt('1d')+'</a></li>';
+                options += '<li class="chart-button active"><a href="javascript:void(0);"  title="'+Utils.tt('Last 7 days')+'"  data-day="7d">'+Utils.tt('7d')+'</a></li>';
+                options += '<li class="chart-button"><a href="javascript:void(0);"  title="'+Utils.tt('Last 14 days')+'"  data-day="14d">'+Utils.tt('14d')+'</a></li>';
+                options += '<li class="chart-button"><a href="javascript:void(0);"  title="'+Utils.tt('Last 30 days')+'"  data-day="30d">'+Utils.tt('30d')+'</a></li>';
                 options += '</ul>'
                 that.ui.chartTimeLineList.empty();
                 that.ui.chartTimeLineList.html(options);
@@ -520,7 +521,7 @@ define(['require',
                     if (type === "classification") {
                         newValue = '<a title="Search for entities associated with \'' + key + '\'" class="linkClicked" href="#!/search/searchResult?searchType=basic&tag=' + key + '">' + newValue + '<a>';
                     }
-                    tableBody += '<tr><td>' + key + '</td><td class="">' + newValue + '</td></tr>';
+                    tableBody += '<tr><td>' + Utils.tt(key) + '</td><td class="">' + newValue + '</td></tr>';
                 });
                 return tableBody;
             },
@@ -632,7 +633,7 @@ define(['require',
                             enums = obj.enums,
                             data = obj.data;
                         _.each(data, function(value, key, list) {
-                            tableBody += '<tr><td>' + key + '</td><td class="">' + that.getValue({
+                            tableBody += '<tr><td>' + Utils.tt(key) + '</td><td class="">' + that.getValue({
                                 "value": value,
                                 "type": enums[key]
                             }) + '</td></tr>';
@@ -641,28 +642,28 @@ define(['require',
                     };
                 if (!that.isMigrationView && data.Notification) {
                     var tableCol = [{
-                                label: "Total <br> (from " + (that.getValue({
+                                label: Utils.tt('Total')+" <br> (from " + (that.getValue({
                                     "value": data.Server["startTimeStamp"],
                                     "type": Enums.stats.Server["startTimeStamp"],
                                 })) + ")",
                                 key: "total"
                             },
                             {
-                                label: "Current Hour <br> (from " + (that.getValue({
+                                label: Utils.tt('Current Hour')+" <br> (from " + (that.getValue({
                                     "value": data.Notification["currentHourStartTime"],
                                     "type": Enums.stats.Notification["currentHourStartTime"],
                                 })) + ")",
                                 key: "currentHour"
                             },
-                            { label: "Previous Hour", key: "previousHour" },
+                            { label: Utils.tt("Previous Hour"), key: "previousHour" },
                             {
-                                label: "Current Day <br> (from " + (that.getValue({
+                                label: Utils.tt('Current Day')+" <br> (from " + (that.getValue({
                                     "value": data.Notification["currentDayStartTime"],
                                     "type": Enums.stats.Notification["currentDayStartTime"],
                                 })) + ")",
                                 key: "currentDay"
                             },
-                            { label: "Previous Day", key: "previousDay" }
+                            { label: Utils.tt("Previous Day"), key: "previousDay" }
                         ],
                         tableHeader = ["count", "AvgTime", "EntityCreates", "EntityUpdates", "EntityDeletes", "Failed"];
                     that.ui.notificationCard.html(

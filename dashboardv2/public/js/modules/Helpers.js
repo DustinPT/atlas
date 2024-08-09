@@ -18,7 +18,8 @@
 
 define(['require',
     'handlebars',
-], function(require, Handlebars, localization) {
+    'modules/i18n',
+], function(require, Handlebars, i18n) {
     /*
      * General guidelines while writing helpers:
      *
@@ -57,9 +58,9 @@ define(['require',
         if (!val) return "";
         return val; //localization.formatDate(val, 'f');
     });
-    Handlebars.registerHelper('tt', function(str) {
-        //return localization.tt(str);
-        return str;
+    Handlebars.registerHelper('tt', function() {
+        return i18n.get.apply(i18n,
+            Array.prototype.slice.call(arguments, 0, -1));
     });
 
     Handlebars.registerHelper('ifCond', function(v1, operator, v2, options) {
