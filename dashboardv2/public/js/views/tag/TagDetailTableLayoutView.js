@@ -100,7 +100,7 @@ define(['require',
                     includeAtlasTableSorting: true,
                     gridOpts: {
                         className: "table table-hover backgrid table-quickMenu",
-                        emptyText: 'No records found!'
+                        emptyText: Utils.tt('No records found!')
                     },
                     filterOpts: {},
                     paginatorOpts: {}
@@ -200,7 +200,7 @@ define(['require',
 
                 return this.tagCollection.constructor.getTableCols({
                         typeName: {
-                            label: "Classification",
+                            label: Utils.tt("Classification"),
                             cell: "html",
                             editable: false,
                             formatter: _.extend({}, Backgrid.CellFormatter.prototype, {
@@ -216,7 +216,7 @@ define(['require',
                             })
                         },
                         attributes: {
-                            label: "Attributes",
+                            label: Utils.tt("Attributes"),
                             cell: "html",
                             editable: false,
                             sortable: false,
@@ -243,21 +243,21 @@ define(['require',
                                             }
                                             stringValue += "<tr><td class='html-cell string-cell renderable'>" + _.escape(key) + "</td><td class='html-cell string-cell renderable' data-type='" + sortedObj.typeName + "'>" + _.escape(val) + "</td>";
                                         });
-                                        tagValue = "<div class='mainAttrTable'><table class='attriTable'><tr><th class='html-cell string-cell renderable'>Name</th><th class='html-cell string-cell renderable'>Value</th>" + stringValue + "</table></div>";
+                                        tagValue = "<div class='mainAttrTable'><table class='attriTable'><tr><th class='html-cell string-cell renderable'>"+Utils.tt("Name")+"</th><th class='html-cell string-cell renderable'>"+Utils.tt("Value")+"</th>" + stringValue + "</table></div>";
                                     }
                                     return tagValue;
                                 }
                             })
                         },
                         tool: {
-                            label: "Action",
+                            label: Utils.tt("Action"),
                             cell: "html",
                             editable: false,
                             sortable: false,
                             formatter: _.extend({}, Backgrid.CellFormatter.prototype, {
                                 fromRaw: function(rawValue, model) {
-                                    var deleteData = '<button title="Delete" class="btn btn-action btn-sm" data-id="delete" data-entityguid="' + model.get('entityGuid') + '" data-name="' + model.get('typeName') + '"><i class="fa fa-trash"></i></button>',
-                                        editData = '<button title="Edit" class="btn btn-action btn-sm" data-id="edit" data-name="' + model.get('typeName') + '"><i class="fa fa-pencil"></i></button>',
+                                    var deleteData = '<button title="'+Utils.tt('Delete')+'" class="btn btn-action btn-sm" data-id="delete" data-entityguid="' + model.get('entityGuid') + '" data-name="' + model.get('typeName') + '"><i class="fa fa-trash"></i></button>',
+                                        editData = '<button title="'+Utils.tt('Edit')+'" class="btn btn-action btn-sm" data-id="edit" data-name="' + model.get('typeName') + '"><i class="fa fa-pencil"></i></button>',
                                         btnObj = null;
                                     if (that.guid === model.get('entityGuid')) {
                                         return '<div class="btn-inline">' + deleteData + editData + '</div>'

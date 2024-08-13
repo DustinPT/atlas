@@ -72,7 +72,7 @@ define(['require',
         onRender: function() {
             var that = this;
             this.ui.keyEl.val("");
-            this.ui.keyEl.select2({ placeholder: "Select Attribute" });
+            this.ui.keyEl.select2({ placeholder: Utils.tt("Select Attribute"), language: 'zh-CN' });
 
             if (this.editMode && (!this.model.has("isNew"))) {
                 this.getEditBusinessMetadataEl();

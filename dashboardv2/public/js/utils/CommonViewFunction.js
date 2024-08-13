@@ -761,11 +761,11 @@ define(['require', 'utils/Utils', 'modules/Modal', 'utils/Messages', 'utils/Enum
                 title = (isTermView ? 'Term' : 'Category');
             }
             var modal = new Modal({
-                "title": ((model ? "Update " : "Create ") + title),
+                "title": Utils.tt(((model ? "Update " : "Create ") + title)),
                 "content": view,
-                "cancelText": "Cancel",
+                "cancelText": Utils.tt("Cancel"),
                 "okCloses": false,
-                "okText": model ? "Update" : "Create",
+                "okText": Utils.tt(model ? "Update" : "Create"),
                 "allowCancel": true,
                 "width": "640px"
             }).open();
@@ -880,7 +880,7 @@ define(['require', 'utils/Utils', 'modules/Modal', 'utils/Messages', 'utils/Enum
                             noticeRef.remove();
                         }
                         Utils.notifySuccess({
-                            content: ((isCategoryView || isEntityView ? "Term" : "Category") + " association is removed successfully")
+                            content: Utils.tt(((isCategoryView || isEntityView ? "Term" : "Category") + " association is removed successfully"))
                         });
                         if (options.callback) {
                             options.callback();

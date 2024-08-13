@@ -60,9 +60,9 @@ define(['require',
             var that = this;
             this.updateObj = $.extend(true, {}, this.data);
             this.modal = new Modal({
-                "title": ((this.editMode ? "Edit attributes" : "Attributes") + " of " + this.selectedTermAttribute),
+                "title": Utils.tt((this.editMode ? "Edit attributes" : "Attributes")+" of {{=relationType}}",{relationType:this.selectedTermAttribute}),
                 "content": this,
-                "okText": (this.editMode ? "Update" : "Close"),
+                "okText": Utils.tt(this.editMode ? "Update" : "Close"),
                 "allowCancel": (this.editMode ? true : false),
                 "okCloses": true,
                 "width": "80%",
@@ -105,7 +105,7 @@ define(['require',
                 ajaxOptions = {
                     success: function(rModel, response) {
                         Utils.notifySuccess({
-                            content: "Attributes updated successfully"
+                            content: Utils.tt("Attributes updated successfully")
                         });
                         if (that.callback) {
                             that.callback();
@@ -196,8 +196,8 @@ define(['require',
                 var that = this,
                     notifyObj = {
                         modal: true,
-                        text: "Are you sure you want to remove term association",
-                        okText:"Remove",
+                        text: Utils.tt("Are you sure you want to remove term association"),
+                        okText: Utils.tt("Remove"),
                         ok: function(argument) {
                             var model = new that.glossaryCollection.model(),
                                 selectedGuid = $(e.currentTarget).data('termguid'),
@@ -205,7 +205,7 @@ define(['require',
                                 ajaxOptions = {
                                     success: function(rModel, response) {
                                         Utils.notifySuccess({
-                                            content: "Association removed successfully "
+                                            content: Utils.tt("Association removed successfully")
                                         });
                                         if (that.fetchCollection) {
                                             that.fetchCollection();
@@ -232,13 +232,13 @@ define(['require',
                     getTerms: function(key) {
                         var terms = _.map(that.data[key], function(obj) {
                                 var name = _.escape(obj.qualifiedName) || _.escape(obj.displayText);
-                                return '<span data-guid="' + obj.termGuid + '" class="btn btn-action btn-sm btn-icon btn-blue" data-id="termClick"><span title="' + name + '">' + name + '</span><i class="fa fa-close" data-id="deleteAttribute" data-attributename="' + key + '" data-termguid="' + obj.termGuid + '" data-type="term" title="Remove Term"></i></span>';
+                                return '<span data-guid="' + obj.termGuid + '" class="btn btn-action btn-sm btn-icon btn-blue" data-id="termClick"><span title="' + name + '">' + name + '</span><i class="fa fa-close" data-id="deleteAttribute" data-attributename="' + key + '" data-termguid="' + obj.termGuid + '" data-type="term" title="'+Utils.tt('Remove Term')+'"></i></span>';
                             }).join(""),
                             attributeButtons = "";
                         if (terms.length) {
                             attributeButtons = '<div class="btn-inline">' +
-                                '<button type="button" title="View Attribute" class="btn btn-action btn-sm" data-attributename="' + key + '" data-id="showAttribute"><i class="fa fa-eye fa-fw" aria-hidden="true"></i></button>' +
-                                '<button type="button" title="Edit Attribute" class="btn btn-action btn-sm" data-attributename="' + key + '" data-mode="edit" data-id="showAttribute"><i class="fa fa-pencil fa-fw" aria-hidden="true"></i></button>' +
+                                '<button type="button" title="'+Utils.tt('View Attribute')+'" class="btn btn-action btn-sm" data-attributename="' + key + '" data-id="showAttribute"><i class="fa fa-eye fa-fw" aria-hidden="true"></i></button>' +
+                                '<button type="button" title="'+Utils.tt('Edit Attribute')+'" class="btn btn-action btn-sm" data-attributename="' + key + '" data-mode="edit" data-id="showAttribute"><i class="fa fa-pencil fa-fw" aria-hidden="true"></i></button>' +
                                 '</div>'
                         }
                         return '<td>' + terms + '<button type="button" data-attributename="' + key + '" class="btn btn-action btn-sm" data-id="addTermRelation"><i class="fa fa-plus"></i></button></td><td>' + attributeButtons + '</td>';

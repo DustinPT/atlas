@@ -29,7 +29,7 @@
                     <table class="table table-hover backgrid table-quickMenu">
                         <tbody>
                             <tr class="empty">
-                                <td colspan="16"><span>No Records found!</span></td>
+                                <td colspan="16"><span>{{tt 'No Records found!'}}</span></td>
                             </tr>
                         </tbody>
                     </table>
@@ -51,17 +51,17 @@
                     <div class="inline" data-id="containerCheckBox" style="display: none;">
                         <label class="checkbox-inline btn" for="historicalentities">
                             <input type="checkbox" data-id="checkDeletedEntity" data-value="includeDE" id="historicalentities" />
-                            <b>Show historical entities</b></label>
+                            <b>{{tt 'Show historical entities'}}</b></label>
                     </div>
                     <div class="inline exclude-subclassifications" data-id="containerCheckBox" style="display: none;">
                         <label class="checkbox-inline btn" for="subclassifications">
                             <input type="checkbox" data-id="checkSubClassification" data-value="excludeSC" id="subclassifications" />
-                            <b>Exclude sub-classifications</b></label>
+                            <b>{{tt 'Exclude sub-classifications'}}</b></label>
                     </div>
                     <div class="inline exclude-subtypes" data-id="containerCheckBox" style="display: none;">
                         <label class="checkbox-inline btn" for="subtypes">
                             <input type="checkbox" data-id="checkSubType" data-value="excludeST" id="subtypes" />
-                            <b>Exclude sub-types</b></label>
+                            <b>{{tt 'Exclude sub-types'}}</b></label>
                     </div>
                 </div>
             </div>
@@ -111,7 +111,7 @@
                         </div>
                         <div class="inline">
                             <div class="inline-content">
-                                <span class="control-label-sm inline ">Page Limit :</span>
+                                <span class="control-label-sm inline ">{{tt 'Page Limit :'}}</span>
                                 <div class="inline" style="width: 80px;">
                                     <select data-id="showPage" multiple="multiple" class="form-control"> </select>
                                 </div>

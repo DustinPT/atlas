@@ -202,10 +202,10 @@ define(['require',
                             "enumDefCollection": that.enumDefCollection
                         });
                         that.modal = new Modal({
-                            title: 'Add Attribute',
+                            title: Utils.tt('Add Attribute'),
                             content: view,
-                            cancelText: "Cancel",
-                            okText: 'Add',
+                            cancelText: Utils.tt("Cancel"),
+                            okText: Utils.tt('Add'),
                             allowCancel: true,
                             okCloses: false
                         }).open();
@@ -302,10 +302,10 @@ define(['require',
                 ], function(CreateTagLayoutView, Modal) {
                     var view = new CreateTagLayoutView({ 'tagCollection': that.collection, 'model': that.model, 'tag': that.tag, 'enumDefCollection': enumDefCollection });
                     that.modal = new Modal({
-                        title: 'Edit Classification',
+                        title: Utils.tt('Edit Classification'),
                         content: view,
-                        cancelText: "Cancel",
-                        okText: 'Save',
+                        cancelText: Utils.tt("Cancel"),
+                        okText: Utils.tt('Save'),
                         allowCancel: true,
                     }).open();
                     view.ui.description.on('keyup input', function(e) {

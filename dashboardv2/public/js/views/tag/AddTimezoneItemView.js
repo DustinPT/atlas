@@ -71,7 +71,7 @@ define(['require',
             },
             onRender: function() {
                 var that = this,
-                    tzstr = '<option selected="selected" disabled="disabled">-- Select Timezone --</option>',
+                    tzstr = '<option selected="selected" disabled="disabled">'+Utils.tt('-- Select Timezone --')+'</option>',
                     dateConfig = {
                         "singleDatePicker": true,
                         "showDropdowns": true,
@@ -81,10 +81,40 @@ define(['require',
                         "startDate": new Date(),
                         "autoApply": true,
                         "autoUpdateInput": false,
-                        "locale": {
+                        locale: {
                             format: Globals.dateTimeFormat,
-                            cancelLabel: 'Clear'
-                        },
+                            "separator": " - ",
+                            "applyLabel": Utils.tt("Apply"),
+                            "cancelLabel": Utils.tt("Cancel"),
+                            "fromLabel": Utils.tt("From"),
+                            "toLabel": Utils.tt("To"),
+                            "customRangeLabel": Utils.tt("Custom"),
+                            "weekLabel": Utils.tt("W"),
+                            "daysOfWeek": [
+                                Utils.tt("Su"),
+                                Utils.tt("Mo"),
+                                Utils.tt("Tu"),
+                                Utils.tt("We"),
+                                Utils.tt("Th"),
+                                Utils.tt("Fr"),
+                                Utils.tt("Sa")
+                            ],
+                            "monthNames": [
+                                Utils.tt("January"),
+                                Utils.tt("February"),
+                                Utils.tt("March"),
+                                Utils.tt("April"),
+                                Utils.tt("May"),
+                                Utils.tt("June"),
+                                Utils.tt("July"),
+                                Utils.tt("August"),
+                                Utils.tt("September"),
+                                Utils.tt("October"),
+                                Utils.tt("November"),
+                                Utils.tt("December")
+                            ],
+                            "firstDay": 1
+                        }
                     },
                     startDateObj = _.extend({}, dateConfig),
                     endDateObj = _.extend({}, dateConfig);

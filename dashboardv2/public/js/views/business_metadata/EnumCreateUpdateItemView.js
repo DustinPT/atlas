@@ -216,7 +216,7 @@ define(["require", "backbone", "hbs!tmpl/business_metadata/EnumCreateUpdateItemV
                         if (isPostCallEnum) {
                             that.enumDefCollection.add(model.enumDefs[0]);
                             Utils.notifySuccess({
-                                content: "Enumeration " + selectedEnumName + " added successfully"
+                                content: Utils.tt("Enumeration {{==name}} added successfully",{name:selectedEnumName})
                             });
                         } else {
                             var foundEnum = that.enumDefCollection.fullCollection.find({ guid: model.enumDefs[0].guid })
@@ -224,7 +224,7 @@ define(["require", "backbone", "hbs!tmpl/business_metadata/EnumCreateUpdateItemV
                                 foundEnum.set(model.enumDefs[0]);
                             }
                             Utils.notifySuccess({
-                                content: "Enumeration " + selectedEnumName + " updated successfully"
+                                content: Utils.tt("Enumeration {{=name}} updated successfully",{name:selectedEnumName})
                             });
                         }
                         that.enumDefCollection.fetch({ reset: true });

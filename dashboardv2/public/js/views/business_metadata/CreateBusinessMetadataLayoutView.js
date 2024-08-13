@@ -128,10 +128,10 @@ define(['require',
                     this.ui.createForm.find('input,textarea').placeholder();
                 }
                 if (this.isNewBusinessMetadata == true) {
-                    that.ui.businessMetadataAttrPageOk.text("Create");
+                    that.ui.businessMetadataAttrPageOk.text(Utils.tt("Create"));
                     that.ui.businessMetadataAttrPageOk.attr('data-action', 'newBusinessMetadata');
                 } else {
-                    that.ui.businessMetadataAttrPageOk.text("Save");
+                    that.ui.businessMetadataAttrPageOk.text(Utils.tt("Save"));
                     that.ui.businessMetadataAttrPageOk.attr('data-action', 'attributeEdit');
                 }
                 this.hideLoader();

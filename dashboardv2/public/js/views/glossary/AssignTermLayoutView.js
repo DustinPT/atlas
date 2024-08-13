@@ -71,17 +71,17 @@ define(['require',
                 }
                 var title = "";
                 if (this.isCategoryView || this.isEntityView) {
-                    title = ("Assign term to " + (this.isCategoryView ? "Category" : "entity"))
+                    title = Utils.tt(("Assign term to " + (this.isCategoryView ? "Category" : "entity")))
                 } else if (this.isAttributeRelationView) {
-                    title = "Assign term to " + this.selectedTermAttribute;
+                    title = Utils.tt("Assign term to {{=selectedTermAttribute}}",{selectedTermAttribute:this.selectedTermAttribute});
                 } else {
-                    title = "Assign Category to term";
+                    title = Utils.tt("Assign Category to term");
                 }
                 this.modal = new Modal({
                     "title": title,
                     "content": this,
-                    "cancelText": "Cancel",
-                    "okText": "Assign",
+                    "cancelText": Utils.tt("Cancel"),
+                    "okText": Utils.tt("Assign"),
                     "allowCancel": true,
                     "showFooter": this.isAttributeRelationView ? false : true,
                     "mainClass": "wizard-modal",
@@ -121,17 +121,17 @@ define(['require',
                         transitionEffect: $.fn.steps.transitionEffect.none,
                         transitionEffectSpeed: 200,
                         labels: {
-                            cancel: "Cancel",
-                            finish: "Assign",
-                            next: "Next",
-                            previous: "Previous",
-                            loading: "Loading ..."
+                            cancel: Utils.tt("Cancel"),
+                            finish: Utils.tt("Assign"),
+                            next: Utils.tt("Next"),
+                            previous: Utils.tt("Previous"),
+                            loading: Utils.tt("Loading ...")
                         },
                         onStepChanging: function(event, currentIndex, newIndex) {
                             var isMatch = that.glossary.selectedItem.type == "GlossaryTerm";
                             if (!isMatch) {
                                 Utils.notifyWarn({
-                                    content: "Please select Term for association"
+                                    content: Utils.tt("Please select Term for association")
                                 });
                             }
                             return isMatch
@@ -161,7 +161,7 @@ define(['require',
                     ajaxOptions = {
                         success: function(rModel, response) {
                             Utils.notifySuccess({
-                                content: (that.isCategoryView || that.isEntityView || that.isAttributeRelationView ? "Term" : "Category") + " is associated successfully "
+                                content: Utils.tt((that.isCategoryView || that.isEntityView || that.isAttributeRelationView ? "Term" : "Category") + " is associated successfully")
                             });
                             that.modal.trigger('closeModal');
                             if (that.callback) {

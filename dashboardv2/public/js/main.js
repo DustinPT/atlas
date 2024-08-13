@@ -140,7 +140,10 @@ require.config({
         'trumbowyg': {
             'deps': ['jquery'],
             'exports': 'trumbowyg'
-        }
+        },
+        'select2-zh-CN': {
+            'deps': ['select2']
+        },
     },
 
     paths: {
@@ -171,6 +174,7 @@ require.config({
         'hbs': 'external_lib/require-handlebars-plugin/js/hbs',
         'i18nprecompile': 'external_lib/require-handlebars-plugin/js/i18nprecompile',
         'select2': 'libs/select2/select2.full.min',
+        'select2-zh-CN': 'libs/select2/i18n/zh-CN',
         'backgrid-select-all': 'libs/backgrid-select-all/backgrid-select-all.min',
         'moment': 'libs/moment/js/moment.min',
         'moment-timezone': 'libs/moment-timezone/moment-timezone-with-data.min',
@@ -216,7 +220,8 @@ require(['App',
     'utils/Overrides',
     'bootstrap',
     'd3',
-    'select2'
+    'select2',
+    'select2-zh-CN'
 ], function(App, Router, Helper, CommonViewFunction, Globals, UrlLinks, VEntityList, VTagList, VRelationshipSearchList, Enums, Utils) {
     var that = this;
     this.asyncFetchCounter = 5 + (Enums.addOnEntities.length + 1);

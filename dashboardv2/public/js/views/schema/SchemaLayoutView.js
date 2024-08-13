@@ -86,7 +86,7 @@ define(['require',
                     includeAtlasTableSorting: true,
                     gridOpts: {
                         className: "table table-hover backgrid table-quickMenu",
-                        emptyText: 'No records found!'
+                        emptyText: Utils.tt('No records found!')
                     },
                     filterOpts: {},
                     paginatorOpts: {}
@@ -201,7 +201,7 @@ define(['require',
                     _.each(_.keys(this.schemaTableAttribute), function(key) {
                         if (key !== "position") {
                             col[key] = {
-                                label: key.capitalize(),
+                                label: Utils.tt(key.capitalize()),
                                 cell: "html",
                                 editable: false,
                                 className: "searchTableName",
@@ -225,7 +225,7 @@ define(['require',
                         }
                     });
                     col['tag'] = {
-                        label: "Classifications",
+                        label: Utils.tt("Classifications"),
                         cell: "Html",
                         editable: false,
                         sortable: false,

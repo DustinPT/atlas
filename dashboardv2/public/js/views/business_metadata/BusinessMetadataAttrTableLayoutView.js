@@ -19,8 +19,9 @@
 define(['require',
     'backbone',
     'hbs!tmpl/business_metadata/BusinessMetadataAttrTableLayoutView_tmpl',
-    'collection/VEntityList'
-], function(require, Backbone, BusinessMetadataAttrTableLayoutView_tmpl, VEntityList) {
+    'collection/VEntityList',
+    'utils/Utils',
+], function(require, Backbone, BusinessMetadataAttrTableLayoutView_tmpl, VEntityList, Utils) {
     'use strict';
 
     var BusinessMetadataAttrTableLayoutView = Backbone.Marionette.LayoutView.extend(
@@ -136,9 +137,9 @@ define(['require',
                             isNewAttr: that.newAttr
                         });
                         if (isAttrEdit) {
-                            that.ui.businessMetadataAttrPageTitle.text("Update Attribute of: " + selectedBusinessMetadata.get('name'));
+                            that.ui.businessMetadataAttrPageTitle.text(Utils.tt("Update Attribute of: ") + selectedBusinessMetadata.get('name'));
                         } else {
-                            that.ui.businessMetadataAttrPageTitle.text("Add Business Metadata Attribute for: " + selectedBusinessMetadata.get('name'));
+                            that.ui.businessMetadataAttrPageTitle.text(Utils.tt("Add Business Metadata Attribute for: ") + selectedBusinessMetadata.get('name'));
                         }
                         that.RModal.show(that.view);
                     });
@@ -158,7 +159,7 @@ define(['require',
                 var that = this;
                 return this.businessMetadataAttr.constructor.getTableCols({
                     name: {
-                        label: "Attribute Name",
+                        label: Utils.tt("Attribute Name"),
                         cell: "html",
                         editable: false,
                         formatter: _.extend({}, Backgrid.CellFormatter.prototype, {
@@ -168,7 +169,7 @@ define(['require',
                         })
                     },
                     typeName: {
-                        label: "Type Name",
+                        label: Utils.tt("Type Name"),
                         cell: "html",
                         editable: false,
                         formatter: _.extend({}, Backgrid.CellFormatter.prototype, {
@@ -178,12 +179,12 @@ define(['require',
                         })
                     },
                     searchWeight: {
-                        label: "Search Weight",
+                        label: Utils.tt("Search Weight"),
                         cell: "String",
                         editable: false
                     },
                     enableMultipleValue: {
-                        label: "Enable Multivalues",
+                        label: Utils.tt("Enable Multivalues"),
                         cell: "html",
                         editable: false,
                         sortable: false,
@@ -198,7 +199,7 @@ define(['require',
                         })
                     },
                     maxStrLength: {
-                        label: "Max Length",
+                        label: Utils.tt("Max Length"),
                         cell: "html",
                         editable: false,
                         formatter: _.extend({}, Backgrid.CellFormatter.prototype, {
@@ -212,7 +213,7 @@ define(['require',
                         })
                     },
                     applicableEntityTypes: {
-                        label: "Entity Type(s)",
+                        label: Utils.tt("Entity Type(s)"),
                         cell: "html",
                         editable: false,
                         formatter: _.extend({}, Backgrid.CellFormatter.prototype, {
@@ -230,13 +231,13 @@ define(['require',
                         })
                     },
                     tool: {
-                        label: "Action",
+                        label: Utils.tt("Action"),
                         cell: "html",
                         editable: false,
                         sortable: false,
                         formatter: _.extend({}, Backgrid.CellFormatter.prototype, {
                             fromRaw: function(rawValue, model) {
-                                return '<div class="btn btn-action btn-sm" data-id="attributeEdit" data-action="attributeEdit" data-name="' + model.get('name') + '">Edit</div>';
+                                return '<div class="btn btn-action btn-sm" data-id="attributeEdit" data-action="attributeEdit" data-name="' + model.get('name') + '">'+Utils.tt('Edit')+'</div>';
                             }
                         })
                     }

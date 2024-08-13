@@ -18,12 +18,12 @@
     {{#each items}}
     <tr class="custom-tr">
         <td class="custom-col-1">
-            <input placeholder="key" type="text" data-type="key" data-index={{@index}} class="form-control" value={{key}}></input>
+            <input placeholder="{{tt 'key'}}" type="text" data-type="key" data-index={{@index}} class="form-control" value={{key}}></input>
             <p class="errorMsg"></p>
         </td>
         <td class="custom-col-0"> : </td>
         <td class="custom-col-1">
-            <textarea placeholder="value" data-type="value" data-index={{@index}} class="form-control" class="form-control">{{value}}</textarea>
+            <textarea placeholder="{{tt 'value'}}" data-type="value" data-index={{@index}} class="form-control" class="form-control">{{value}}</textarea>
             <p class="errorMsg"></p>
         </td>
         <td class="custom-col-2">
@@ -42,8 +42,8 @@
         </td>
     </tr>
     {{#if allValueRemovedUpdate}}
-    All properties has been removed. To add a property, click <a href="javascript:void(0)" data-id="addItem">here</a>{{else}}
+    {{tt 'All properties has been removed! To add a property, click '}}<a href="javascript:void(0)" data-id="addItem">{{tt 'here'}}</a>{{else}}
     {{#ifCond items.length "===" 0}}
-    No properties have been created yet. To add a property, click <a href="javascript:void(0)" data-id="addItem">here</a>
+    {{tt 'No properties have been created yet! To add a property, click '}}<a href="javascript:void(0)" data-id="addItem">{{tt 'here'}}</a>
     {{/ifCond}}{{/if}}
 </table>

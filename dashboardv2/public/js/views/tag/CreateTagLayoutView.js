@@ -123,7 +123,7 @@ define(['require',
                 if (platform.name === "IE") {
                     that.ui.parentTag.select2({
                         multiple: true,
-                        placeholder: "Search Classification",
+                        placeholder: Utils.tt("Search Classification"),
                         allowClear: true
                     });
                 }

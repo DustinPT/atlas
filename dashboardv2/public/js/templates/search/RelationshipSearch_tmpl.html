@@ -19,24 +19,24 @@
         <div class="srchType clearfix">
             <div class="label-wrapper row">
                 <div class="col-sm-12" style="margin: 10px 0px 10px 0px">
-                    <button type="button" class="btn btn-action btn-md pull-right typeLOV" title="Refresh" data-id="refreshRelationBtn"><i class="fa fa-refresh"></i></button>
+                    <button type="button" class="btn btn-action btn-md pull-right typeLOV" title="{{tt 'Refresh'}}" data-id="refreshRelationBtn"><i class="fa fa-refresh"></i></button>
                 </div>
             </div>
             <div class="form-group">
                 <div class="srchType">
-                    <span class="srchTitle relationSearchTitle">Search By Relationship</span>
+                    <span class="srchTitle relationSearchTitle">{{tt 'Search By Relationship'}}</span>
                     <div class="col-sm-10 no-padding">
                         <select data-id="relationshipLOV"></select>
                     </div>
                     <div class="col-sm-2 no-padding">
-                        <button type="button" class="btn btn-action btn-md pull-right typeLOV" title="Relationship Attribute Filter" data-id="relationAttrFilter"><i class="fa fa-filter"></i></button>
+                        <button type="button" class="btn btn-action btn-md pull-right typeLOV" title="{{tt 'Relationship Attribute Filter'}}" data-id="relationAttrFilter"><i class="fa fa-filter"></i></button>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <button class="btn btn-action" data-id="clearRelationSearch">Clear</button>
-    <button type="button" class="btn btn-atlas pull-right" data-id="relationshipSearchBtn" disabled="disabled">Search</button>
+    <button class="btn btn-action" data-id="clearRelationSearch">{{tt 'Clear'}}</button>
+    <button type="button" class="btn btn-atlas pull-right" data-id="relationshipSearchBtn" disabled="disabled">{{tt 'Search'}}</button>
 </div>
 <div class="">
     <div class="col-sm-12 well relationshipSaveSearch" data-id="r_saveSearchRelationship"></div>

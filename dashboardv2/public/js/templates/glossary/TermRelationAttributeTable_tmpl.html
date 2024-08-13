@@ -17,10 +17,10 @@
 <table class="table table-hover table-quickMenu">
     <thead>
         <tr>
-            <th>{{#if relationTypeTable}}Relation Types{{else}}Term{{/if}}</th>
-            <th>{{#if relationTypeTable}}Related Terms{{else}}Attribute{{/if}}</th>
+            <th>{{#if relationTypeTable}}{{tt 'Relation Types'}}{{else}}{{tt 'Term'}}{{/if}}</th>
+            <th>{{#if relationTypeTable}}{{tt 'Related Terms'}}{{else}}{{tt 'Attribute'}}{{/if}}</th>
             {{#if relationTypeTable}}
-            <th>Attributes</th>{{/if}}
+            <th>{{tt 'Attributes'}}</th>{{/if}}
         </tr>
     </thead>
     <tbody>
@@ -37,8 +37,8 @@
                     <table class="attriTable">
                         <thead>
                             <tr>
-                                <th>Name</th>
-                                <th>Value</th>
+                                <th>{{tt 'Name'}}</th>
+                                <th>{{tt 'Value'}}</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -60,7 +60,7 @@
         </tr>
         {{/each}}{{else}}
         <tr class=" empty text-center ">
-            <td colspan=" 3 "><span>No records found!</span></td>
+            <td colspan=" 3 "><span>{{tt 'No records found!'}}</span></td>
         </tr>{{/if}} {{/if}}
     </tbody>
 </table>

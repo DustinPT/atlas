@@ -19,19 +19,19 @@
         {{#ifCond labels.length "===" 0}}
         <div class="panel-heading" data-toggle="collapse" href={{div_1.anchor}} {{#ifCond swapItem "===" true}} aria-expanded="true" {{else}} aria-expanded="false" {{/ifCond}} style="width: 70%">
             <h4 class="panel-title">
-                <a>Labels </a>
+                <a>{{tt 'Labels'}} </a>
             </h4>
             <div class="btn-group pull-left">
-                <button type="button" title="Collapse"><i class="ec-icon fa"></i></button>
+                <button type="button" title="{{tt 'Collapse'}}"><i class="ec-icon fa"></i></button>
             </div>
         </div>
         {{else}}
         <div class="panel-heading" data-toggle="collapse" href={{div_2.anchor}} aria-expanded="true" style="width: 70%">
             <h4 class="panel-title">
-                <a>Labels </a>
+                <a>{{tt 'Labels'}} </a>
             </h4>
             <div class="btn-group pull-left">
-                <button type="button" title="Collapse"><i class="ec-icon fa"></i></button>
+                <button type="button" title="{{tt 'Collapse'}}"><i class="ec-icon fa"></i></button>
             </div>
         </div>
         {{/ifCond}}
@@ -39,12 +39,12 @@
         <div class="panel-actions detailpage-panel-button">
             {{#ifCond swapItem "!==" true}}
             <button class="btn btn-action btn-sm" data-id="addLabels">
-                {{#ifCond labels.length "===" 0}} Add {{else}} Edit {{/ifCond}}
+                {{#ifCond labels.length "===" 0}} {{tt 'Add'}} {{else}} {{tt 'Edit'}} {{/ifCond}}
             </button>
             {{/ifCond}}
             {{#ifCond saveLabels "===" true}}
-            <button class="btn btn-action btn-sm" data-id="saveLabels">Save</button>
-            <button class="btn btn-action btn-sm" data-id="cancel">Cancel</button>
+            <button class="btn btn-action btn-sm" data-id="saveLabels">{{tt 'Save'}}</button>
+            <button class="btn btn-action btn-sm" data-id="cancel">{{tt 'Cancel'}}</button>
             {{/ifCond}}
         </div>
         {{/ifCond}}
@@ -58,7 +58,7 @@
                         {{else}}
                         {{#ifCond readOnlyEntity "===" false}}
                         <div class="badge-container">
-                            No labels have been created yet. To add a labels, click <a href="javascript:void(0)" data-id="addLabels">here</a>
+                            {{tt 'No labels have been created yet! To add a labels, click '}}<a href="javascript:void(0)" data-id="addLabels">{{tt 'here'}}</a>
                         </div>
                         {{/ifCond}}
                         {{/ifCond}}

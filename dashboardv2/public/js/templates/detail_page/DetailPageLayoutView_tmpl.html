@@ -26,23 +26,23 @@
         <!-- <div data-id="editButtonContainer" class="pull-right"></div> -->
         {{/if}}
         <div class="form-group tagBox col-md-12">
-            <span class="control-label-sm-pr pull-left">Classifications:</span>
+            <span class="control-label-sm-pr pull-left">{{tt 'Classifications:'}}</span>
             <div class="pull-left" data-id="tagList">
-                <button class="btn btn-action btn-sm" title="Add Classification" data-id="addTag">
+                <button class="btn btn-action btn-sm" title="{{tt 'Add Classification'}}" data-id="addTag">
                     <i class="fa fa-plus"> </i>
                 </button>
             </div>
         </div>
         <div class="form-group termBox col-md-12">
-            <span class="control-label-sm-pr pull-left">Terms:</span>
+            <span class="control-label-sm-pr pull-left">{{tt 'Terms:'}}</span>
             <div class="pull-left" data-id="termList">
-                <button class="btn btn-action btn-sm" title="Add Term" data-id="addTerm">
+                <button class="btn btn-action btn-sm" title="{{tt 'Add Term'}}" data-id="addTerm">
                     <i class="fa fa-plus"> </i>
                 </button>
             </div>
         </div>
         <div class="form-group propagatedTagBox col-md-12" style="display: none;" data-id="propagatedTagDiv">
-            <span class="control-label-sm-pr pull-left">Propagated Classifications:</span>
+            <span class="control-label-sm-pr pull-left">{{tt 'Propagated Classifications:'}}</span>
             <div class="pull-left" data-id="propagatedTagList">
             </div>
         </div>
@@ -50,16 +50,16 @@
     <div class="row">
         <div class="col-sm-12 default-tab">
             <ul class="nav nav-tabs" data-id="tab-list">
-                <li role="properties" class="tab active"><a href="#tab-details" aria-controls="tab-details" role="tab" data-toggle="tab">Properties</a></li>
-                <li role="lineage" class="tab lineageGraph" style="display:none"><a href="#tab-lineage" aria-controls="tab-lineage" role="tab" data-toggle="tab">Lineage</a></li>
-                <li role="relationship" class="tab"><a href="#tab-relationship" aria-controls="tab-relationship" role="tab" data-toggle="tab">Relationships</a></li>
-                <li role="classification"><a href="#tab-tagTable" aria-controls="tab-tagTable" role="tab" data-toggle="tab">Classifications</a></li>
-                <li role="audit" class="tab"><a href="#tab-audit" aria-controls="tab-audit" role="tab" data-toggle="tab">Audits</a></li>
-                <li role="raudits" class="tab replicationTab" style="display:none"><a href="#tab-raudit" aria-controls="tab-raudit" role="tab" data-toggle="tab">Export/Import Audits</a></li>
-                <li role="schema" class="tab schemaTable" style="display:none"><a href="#tab-schema" aria-controls="tab-schema" role="tab" data-toggle="tab">Schema</a></li>
-                <li role="profile" class="tab profileTab" style="display:none"><a href="#tab-profile" aria-controls="tab-profile" role="tab" data-toggle="tab">Profile</a></li>
+                <li role="properties" class="tab active"><a href="#tab-details" aria-controls="tab-details" role="tab" data-toggle="tab">{{tt 'Properties'}}</a></li>
+                <li role="lineage" class="tab lineageGraph" style="display:none"><a href="#tab-lineage" aria-controls="tab-lineage" role="tab" data-toggle="tab">{{tt 'Lineage'}}</a></li>
+                <li role="relationship" class="tab"><a href="#tab-relationship" aria-controls="tab-relationship" role="tab" data-toggle="tab">{{tt 'Relationships'}}</a></li>
+                <li role="classification"><a href="#tab-tagTable" aria-controls="tab-tagTable" role="tab" data-toggle="tab">{{tt 'Classifications'}}</a></li>
+                <li role="audit" class="tab"><a href="#tab-audit" aria-controls="tab-audit" role="tab" data-toggle="tab">{{tt 'Audits'}}</a></li>
+                <li role="raudits" class="tab replicationTab" style="display:none"><a href="#tab-raudit" aria-controls="tab-raudit" role="tab" data-toggle="tab">{{tt 'Export/Import Audits'}}</a></li>
+                <li role="schema" class="tab schemaTable" style="display:none"><a href="#tab-schema" aria-controls="tab-schema" role="tab" data-toggle="tab">{{tt 'Schema'}}</a></li>
+                <li role="profile" class="tab profileTab" style="display:none"><a href="#tab-profile" aria-controls="tab-profile" role="tab" data-toggle="tab">{{tt 'Profile'}}</a></li>
                 {{#if isTasksEnabled}}
-                <li role="pendingTask" class="tab"><a href="#tab-pendingTask" aria-controls="tab-pendingTask" role="tab" data-toggle="tab">Tasks</a></li>
+                <li role="pendingTask" class="tab"><a href="#tab-pendingTask" aria-controls="tab-pendingTask" role="tab" data-toggle="tab">{{tt 'Tasks'}}</a></li>
                 {{/if}}
             </ul>
         </div>

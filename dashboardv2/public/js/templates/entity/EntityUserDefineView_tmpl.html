@@ -19,19 +19,19 @@
         {{#ifCond customAttibutes.length "===" 0}}
         <div class="panel-heading" data-toggle="collapse" href={{divId_1.anchor}} {{#ifCond swapItem "===" true}} aria-expanded="true" {{else}} aria-expanded="false" {{/ifCond}} style="width: 70%">
             <h4 class="panel-title">
-                <a>User-defined properties </a>
+                <a>{{tt 'User-defined properties'}} </a>
             </h4>
             <div class="btn-group pull-left">
-                <button type="button" title="Collapse"><i class="ec-icon fa"></i></button>
+                <button type="button" title="{{tt 'Collapse'}}"><i class="ec-icon fa"></i></button>
             </div>
         </div>
         {{else}}
         <div class="panel-heading" data-toggle="collapse" href={{divId_2.anchor}} aria-expanded="true" style="width: 70%">
             <h4 class="panel-title">
-                <a>User-defined properties </a>
+                <a>{{tt 'User-defined properties'}} </a>
             </h4>
             <div class="btn-group pull-left">
-                <button type="button" title="Collapse"><i class="ec-icon fa"></i></button>
+                <button type="button" title="{{tt 'Collapse'}}"><i class="ec-icon fa"></i></button>
             </div>
         </div>
         {{/ifCond}}
@@ -39,12 +39,12 @@
         <div class="panel-actions detailpage-panel-button">
             {{#ifCond swapItem "!==" true}}
             <button class="btn btn-action btn-sm" data-id="addAttr">
-                {{#ifCond customAttibutes.length "===" 0}} Add {{else}} Edit {{/ifCond}}
+                {{#ifCond customAttibutes.length "===" 0}} {{tt 'Add'}} {{else}} {{tt 'Edit'}} {{/ifCond}}
             </button>
             {{/ifCond}}
             {{#ifCond saveAttrItems "===" true}}
-            <button class="btn btn-action btn-sm" data-id="saveAttrItems">Save</button>
-            <button class="btn btn-action btn-sm" data-id="cancel">Cancel</button>
+            <button class="btn btn-action btn-sm" data-id="saveAttrItems">{{tt 'Save'}}</button>
+            <button class="btn btn-action btn-sm" data-id="cancel">{{tt 'Cancel'}}</button>
             {{/ifCond}}
         </div>
         {{/ifCond}}
@@ -57,7 +57,7 @@
                         <div id="r_entityUserDefinedItemView"></div>
                         {{else}}
                         {{#ifCond readOnlyEntity "===" false}}
-                        No properties have been created yet. To add a property, click <a href="javascript:void(0)" data-id="addItem">here</a>
+                        {{tt 'No properties have been created yet! To add a property, click '}}<a href="javascript:void(0)" data-id="addItem">{{tt 'here'}}</a>
                         {{/ifCond}}
                     </div>
                     {{/ifCond}}

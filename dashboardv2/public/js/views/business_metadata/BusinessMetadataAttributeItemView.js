@@ -17,8 +17,9 @@
  */
 define(['require',
     'backbone',
-    'hbs!tmpl/business_metadata/BusinessMetadataAttributeItemView_tmpl'
-], function(require, Backbone, BusinessMetadataAttributeItemViewTmpl) {
+    'hbs!tmpl/business_metadata/BusinessMetadataAttributeItemView_tmpl',
+    'utils/Utils',
+], function(require, Backbone, BusinessMetadataAttributeItemViewTmpl, Utils) {
     'use strict';
 
     return Backbone.Marionette.ItemView.extend(
@@ -163,7 +164,7 @@ define(['require',
                     }
                 });
                 this.ui.entityTypeSelector.select2({
-                    placeholder: "Select Entity type",
+                    placeholder: Utils.tt("Select Entity type"),
                     allowClear: true,
                     multiple: true,
                     selectionAdapter: $.fn.select2.amd.require("TagHideDeleteButtonAdapter")
@@ -240,7 +241,7 @@ define(['require',
                 this.ui.enumValueSelector.append(enumValues);
                 this.ui.enumValueSelector.val(selectedValues);
                 this.ui.enumValueSelector.select2({
-                    placeholder: "Select Enum value",
+                    placeholder: Utils.tt("Select Enum value"),
                     allowClear: false,
                     tags: false,
                     multiple: true
@@ -256,7 +257,7 @@ define(['require',
                 this.ui.enumTypeSelector.append(enumTypes);
                 this.ui.enumTypeSelector.val('');
                 this.ui.enumTypeSelector.select2({
-                    placeholder: "Select Enum name",
+                    placeholder: Utils.tt("Select Enum name"),
                     tags: false,
                     allowClear: true,
                     multiple: false
@@ -283,11 +284,11 @@ define(['require',
                             businessMetadataDefCollection: that.businessMetadataDefCollection
                         }),
                         modal = new Modal({
-                            title: "Create/ Update Enum",
+                            title: Utils.tt("Create/ Update Enum"),
                             content: view,
-                            cancelText: "Cancel",
+                            cancelText: Utils.tt("Cancel"),
                             okCloses: false,
-                            okText: "Update",
+                            okText: Utils.tt("Update"),
                             allowCancel: true,
                             showFooter: false
                         }).open();

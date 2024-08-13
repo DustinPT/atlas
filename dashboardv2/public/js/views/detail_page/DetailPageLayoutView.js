@@ -470,10 +470,11 @@ define(['require',
                 var that = this,
                     tagName = $(e.currentTarget).parent().text().split('@')[0],
                     entityGuid = $(e.currentTarget).data("entityguid");
+                
                 CommonViewFunction.deleteTag(_.extend({}, {
                     guid: that.id,
                     associatedGuid: that.id != entityGuid ? entityGuid : null,
-                    msg: "<div class='ellipsis-with-margin'>Remove: " + "<b>" + _.escape(tagName) + "</b> assignment from <b>" + this.name + "?</b></div>",
+                    msg: "<div class='ellipsis-with-margin'>" + Utils.tt("Remove: {{=tagName}} assignment from {{=termName}}?",{tagName:"<b>" + _.escape(tagName)+"</b>",termName:"<b>" + this.name+"</b>"}) + "</div>",
                     titleMessage: Messages.removeTag,
                     okText: "Remove",
                     showLoader: that.showLoader.bind(that),
@@ -487,7 +488,7 @@ define(['require',
             onClickTermCross: function(e) {
                 var $el = $(e.currentTarget),
                     termGuid = $el.data('guid'),
-                    termName = $el.text(),
+                    termName = $el.prev().text(),
                     that = this,
                     termObj = _.find(this.collection.first().get('entity').relationshipAttributes.meanings, { guid: termGuid });
                 CommonViewFunction.removeCategoryTermAssociation({
@@ -497,7 +498,7 @@ define(['require',
                         relationshipGuid: termObj.relationshipGuid
                     },
                     collection: that.glossaryCollection,
-                    msg: "<div class='ellipsis-with-margin'>Remove: " + "<b>" + _.escape(termName) + "</b> assignment from <b>" + this.name + "?</b></div>",
+                    msg: "<div class='ellipsis-with-margin'>" + Utils.tt("Remove: {{=tagName}} assignment from {{=termName}}?",{tagName:"<b>" + _.escape(termName)+"</b>",termName:"<b>" + this.name+"</b>"}) + "</div>",
                     titleMessage: Messages.glossary.removeTermfromEntity,
                     isEntityView: true,
                     buttonText: "Remove",
@@ -514,7 +515,7 @@ define(['require',
                     propagatedTagListData = "";
                 _.each(tagObject.self, function(val) {
                     var parentName = that.getTagParentList(val.typeName);
-                    tagData += '<span class="btn btn-action btn-sm btn-icon btn-blue" data-id="tagClick"><span title="' + parentName + '">' + _.escape(parentName) + '</span><i class="fa fa-close" data-id="deleteTag" data-type="tag" title="Remove Classification"></i></span>';
+                    tagData += '<span class="btn btn-action btn-sm btn-icon btn-blue" data-id="tagClick"><span title="' + parentName + '">' + _.escape(parentName) + '</span><i class="fa fa-close" data-id="deleteTag" data-type="tag" title="'+Utils.tt('Remove Classification')+'"></i></span>';
                 });
                 _.each(tagObject.propagatedMap, function(val, key) {
                     var parentName = that.getTagParentList(val.typeName);
@@ -531,7 +532,7 @@ define(['require',
                     termData = "";
                 _.each(data, function(val) {
                     var glossaryName = val.qualifiedName ? val.qualifiedName : val.displayText;
-                    termData += '<span class="btn btn-action btn-sm btn-icon btn-blue" data-id="termClick" title= "' + glossaryName + '"><span>' + _.escape(glossaryName) + '</span><i class="' + (val.relationshipStatus == "ACTIVE" ? 'fa fa-close' : "") + '" data-id="deleteTerm" data-guid="' + val.guid + '" data-type="term" title="Remove Term"></i></span>';
+                    termData += '<span class="btn btn-action btn-sm btn-icon btn-blue" data-id="termClick" title= "' + glossaryName + '"><span>' + _.escape(glossaryName) + '</span><i class="' + (val.relationshipStatus == "ACTIVE" ? 'fa fa-close' : "") + '" data-id="deleteTerm" data-guid="' + val.guid + '" data-type="term" title="'+Utils.tt('Remove Term')+'"></i></span>';
                 });
                 this.ui.termList.find("span.btn").remove();
                 this.ui.termList.prepend(termData);

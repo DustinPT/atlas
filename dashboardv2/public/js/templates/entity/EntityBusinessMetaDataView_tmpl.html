@@ -17,17 +17,17 @@
 <div class="panel panel-default custom-panel expand_collapse_panel-icon businessMetaDataPanel" style="position:relative;">
     <div class="panel-heading main-parent collapsed" data-toggle="collapse" href="#businessMetadataCollapse" aria-expanded="false" style="width: 70%;">
         <h4 class="panel-title">
-            <a>Business Metadata</a>
+            <a>{{tt 'Business Metadata'}}</a>
         </h4>
         <div class="btn-group pull-left">
-            <button type="button" title="Collapse"><i class="ec-icon fa"></i></button>
+            <button type="button" title="{{tt 'Collapse'}}"><i class="ec-icon fa"></i></button>
         </div>
     </div>
     {{#ifCond readOnlyEntity "===" false}}
     <div class="panel-actions detailpage-panel-button">
-        <button class="btn btn-action btn-sm" data-id="addBusinessMetadata">Add</button>
-        <button class="btn btn-action btn-sm" style="display: none;" data-id="saveBusinessMetadata">Save</button>
-        <button class="btn btn-action btn-sm" style="display: none;" data-id="cancel">Cancel</button>
+        <button class="btn btn-action btn-sm" data-id="addBusinessMetadata">{{tt 'Add'}}</button>
+        <button class="btn btn-action btn-sm" style="display: none;" data-id="saveBusinessMetadata">{{tt 'Save'}}</button>
+        <button class="btn btn-action btn-sm" style="display: none;" data-id="cancel">{{tt 'Cancel'}}</button>
     </div>
     {{/ifCond}}
     <div id="businessMetadataCollapse" class="panel-collapse collapse">
@@ -35,7 +35,7 @@
             <div data-id="businessMetadataTree"></div>
             <div class="editBox" style="display: none;">
                 <div class="form-group">
-                    <a href="javascript:void(0)" class="btn btn-action btn-sm" data-id="addItem" data-type="addAttrButton">Add New Attribute</a>
+                    <a href="javascript:void(0)" class="btn btn-action btn-sm" data-id="addItem" data-type="addAttrButton">{{tt 'Add New Attribute'}}</a>
                 </div>
                 <ul class="business-metadata-tree-parent" data-id="itemView"></ul>
             </div>

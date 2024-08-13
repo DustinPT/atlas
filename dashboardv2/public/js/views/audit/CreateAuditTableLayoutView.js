@@ -105,7 +105,7 @@ define(['require',
 
             },
             updateName: function(name) {
-                this.ui.name.html("<span>Name: </span><span>" + name + "</span>");
+                this.ui.name.html("<span>"+Utils.tt("Name: ")+"</span><span>" + name + "</span>");
             },
             noDetailsShow: function() {
                 this.ui.noData.removeClass('hide');
@@ -161,7 +161,7 @@ define(['require',
                                             })
                                         }
                                         that.ui.attributeDetails.removeClass('hide');
-                                        that.action.indexOf("Classification") === -1 ? that.ui.panelAttrHeading.html("Technical properties ") : that.ui.panelAttrHeading.html("Properties ");
+                                        that.action.indexOf("Classification") === -1 ? that.ui.panelAttrHeading.html(Utils.tt("Technical properties")) : that.ui.panelAttrHeading.html(Utils.tt("Properties"));
                                         var attrTable = that.createTableWithValues(attributesDetails);
                                         that.ui.attributeCard.html(
                                             attrTable);

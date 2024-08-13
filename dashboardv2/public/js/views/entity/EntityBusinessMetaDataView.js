@@ -107,9 +107,9 @@ define([
                 that.$(".editBox").hide();
                 that.updateToActualData();
                 if (that.collection && that.collection.length === 0) {
-                    that.ui.addBusinessMetadata.text("Add");
+                    that.ui.addBusinessMetadata.text(Utils.tt("Add"));
                 } else {
-                    that.ui.addBusinessMetadata.text("Edit");
+                    that.ui.addBusinessMetadata.text(Utils.tt("Edit"));
                 }
             });
         },
@@ -147,9 +147,9 @@ define([
             var collection = this.editMode ? this.collection : this.actualCollection,
                 headingEl = this.$el.find(".panel-heading.main-parent");
             if (collection && collection.length === 0) {
-                this.ui.addBusinessMetadata.text("Add");
+                this.ui.addBusinessMetadata.text(Utils.tt("Add"));
             } else {
-                this.ui.addBusinessMetadata.text("Edit");
+                this.ui.addBusinessMetadata.text(Utils.tt("Edit"));
                 if (headingEl.hasClass("collapsed")) {
                     headingEl.click();
                 }
@@ -281,7 +281,7 @@ define([
             });
             var html = li;
             if (html === "" && this.readOnlyEntity === false) {
-                html = '<div class="col-md-12"> No business metadata have been created yet. To add a business metadata, click <a href="javascript:void(0)" data-id="addBusinessMetadata">here</a></div>';
+                html = '<div class="col-md-12"> '+Utils.tt('No business metadata have been created yet! To add a business metadata, click ')+'<a href="javascript:void(0)" data-id="addBusinessMetadata">'+Utils.tt('here')+'</a></div>';
             }
             this.ui.businessMetadataTree.html(html);
         },
@@ -289,7 +289,7 @@ define([
             return '<div class="panel panel-default custom-panel expand_collapse_panel-icon no-border business-metadata-detail-attr">' +
                 '<div class="panel-heading" data-toggle="collapse" href="#' + _.escape(obj.get("__internal_UI_businessMetadataName")) + '" aria-expanded="true" style="width: 90%;">' +
                 '<h4 class="panel-title"> <a>' + _.escape(obj.get("__internal_UI_businessMetadataName")) + '</a></h4>' +
-                '<div class="btn-group pull-left"> <button type="button" title="Collapse"><i class="ec-icon fa"></i></button></div>' +
+                '<div class="btn-group pull-left"> <button type="button" title="'+Utils.tt('Collapse')+'"><i class="ec-icon fa"></i></button></div>' +
                 '</div>' +
                 '<div id="' + _.escape(obj.get("__internal_UI_businessMetadataName")) + '" class="panel-collapse collapse in">' +
                 '<div class="panel-body"><table class="table bold-key">' + tableBody + '</table></div>' +

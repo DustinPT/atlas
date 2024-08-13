@@ -76,7 +76,7 @@ define(['require',
                     includeFooterRecords: false,
                     gridOpts: {
                         className: "table table-hover backgrid table-quickMenu",
-                        emptyText: 'No records found!'
+                        emptyText: Utils.tt('No records found!')
                     },
                     isApiSorting: false,
                     atlasPaginationOpts: this.getPaginationOptions(),
@@ -166,7 +166,7 @@ define(['require',
                         }
                     },
                     type: {
-                        label: "Type",
+                        label: Utils.tt("Type"),
                         cell: "html",
                         sortable: false,
                         editable: false,
@@ -177,19 +177,19 @@ define(['require',
                         })
                     },
                     guid: {
-                        label: "Guid",
+                        label: Utils.tt("Guid"),
                         cell: "html",
                         sortable: false,
                         editable: false
                     },
                     status: {
-                        label: "Status",
+                        label: Utils.tt("Status"),
                         cell: "html",
                         sortable: false,
                         editable: false
                     },
                     createdTime: {
-                        label: "Created Time",
+                        label: Utils.tt("Created Time"),
                         cell: "html",
                         editable: false,
                         sortable: false,
@@ -200,7 +200,7 @@ define(['require',
                         })
                     },
                     updatedTime: {
-                        label: "Updated Time",
+                        label: Utils.tt("Updated Time"),
                         cell: "html",
                         editable: false,
                         sortable: false,

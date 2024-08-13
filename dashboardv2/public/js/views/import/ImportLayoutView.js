@@ -133,7 +133,7 @@ define([
                         if (success) {
                             that.modal.trigger("cancel");
                             Utils.notifySuccess({
-                                content: "File: " + file.name + " imported successfully"
+                                content: Utils.tt("File: {{=name}} imported successfully",{name:file.name})
                             });
                         }
                         if (that.callback && ((response.successImportInfoList && response.successImportInfoList.length > 0) || success)) {

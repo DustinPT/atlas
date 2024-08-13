@@ -184,12 +184,12 @@ define(['require',
                             saveState: false
                         },
                         visibilityControlOpts: {
-                            buttonTemplate: _.template("<button class='btn btn-action btn-sm pull-right'>Columns&nbsp<i class='fa fa-caret-down'></i></button>")
+                            buttonTemplate: _.template("<button class='btn btn-action btn-sm pull-right'>"+Utils.tt("Columns")+"&nbsp<i class='fa fa-caret-down'></i></button>")
                         },
                         el: this.ui.colManager
                     },
                     gridOpts: {
-                        emptyText: 'No Records found!',
+                        emptyText: Utils.tt('No Records found!'),
                         className: 'table table-hover backgrid table-quickMenu colSort'
                     },
                     sortOpts: {
@@ -363,7 +363,7 @@ define(['require',
                             that.pageTo = that.pageTo - that.limit;
                             that.pageFrom = (that.pageTo - that.limit) + 1;
                         }
-                        that.ui.pageRecordText.html("Showing  <u>" + that.searchCollection.models.length + " records</u> From " + that.pageFrom + " - " + that.pageTo);
+                        that.ui.pageRecordText.html(Utils.tt('Showing <u>{{=total}} records</u> From {{=pageFrom}} - {{=pageTo}}',{total: that.searchCollection.models.length, pageFrom: that.pageFrom, pageTo: that.pageTo}));
                         that.activePage = Math.round(that.pageTo / that.limit);
                         that.ui.activePage.attr('title', "Page " + that.activePage);
                         that.ui.activePage.text(that.activePage);
@@ -374,7 +374,7 @@ define(['require',
                         }
 
                         if (isRelationSearch && value && !that.profileDBView) {
-                            var searchString = 'Results for: <span class="filterQuery">' + CommonViewFunction.generateQueryOfFilter(that.value) + "</span>";
+                            var searchString = Utils.tt('Results for:')+' <span class="filterQuery">' + CommonViewFunction.generateQueryOfFilter(that.value) + "</span>";
                             that.$('.searchResult').html(searchString);
                         }
                     },
@@ -501,7 +501,7 @@ define(['require',
                     columnToShow = this.searchTableColumns[this.value.relationshipName] == null ? [] : this.searchTableColumns[this.value.relationshipName];
                 }
                 col['name'] = {
-                    label: "Guid",
+                    label: Utils.tt("Guid"),
                     cell: "html",
                     editable: false,
                     resizeable: true,
@@ -535,7 +535,7 @@ define(['require',
                 };
                 if (this.value) {
                     col['typeName'] = {
-                        label: "Type",
+                        label: Utils.tt("Type"),
                         cell: "Html",
                         editable: false,
                         resizeable: true,
@@ -551,7 +551,7 @@ define(['require',
                         })
                     };
                     col['end1'] = {
-                        label: "End1",
+                        label: Utils.tt("End1"),
                         cell: "Html",
                         editable: false,
                         resizeable: true,
@@ -572,7 +572,7 @@ define(['require',
                         })
                     };
                     col['end2'] = {
-                        label: "End2",
+                        label: Utils.tt("End2"),
                         cell: "Html",
                         editable: false,
                         resizeable: true,
@@ -593,7 +593,7 @@ define(['require',
                         })
                     };
                     col['label'] = {
-                        label: "Label",
+                        label: Utils.tt("Label"),
                         cell: "Html",
                         editable: false,
                         resizeable: true,

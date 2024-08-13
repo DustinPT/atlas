@@ -71,7 +71,7 @@ define(['require',
                     includeFooterRecords: false,
                     gridOpts: {
                         className: "table table-hover backgrid table-quickMenu",
-                        emptyText: 'No records found!'
+                        emptyText: Utils.tt('No records found!')
                     },
                     sortOpts: {
                         sortColumn: "timestamp",
@@ -190,13 +190,13 @@ define(['require',
                         }
                     },
                     user: {
-                        label: "Users",
+                        label: Utils.tt("Users"),
                         cell: "html",
                         editable: false,
                         headerCell: that.backgridHeaderClickHandel()
                     },
                     timestamp: {
-                        label: "Timestamp",
+                        label: Utils.tt("Timestamp"),
                         cell: "html",
                         editable: false,
                         headerCell: that.backgridHeaderClickHandel(),
@@ -207,7 +207,7 @@ define(['require',
                         })
                     },
                     action: {
-                        label: "Actions",
+                        label: Utils.tt("Actions"),
                         cell: "html",
                         editable: false,
                         headerCell: that.backgridHeaderClickHandel(),

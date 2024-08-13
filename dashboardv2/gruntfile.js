@@ -99,6 +99,7 @@ module.exports = function(grunt) {
                     'index.js': { 'd3-tip': 'd3/' },
                     'dagre-d3.min.js': { 'dagre-d3/dist': 'dagre-d3' },
                     'select2.full.min.js': { 'select2/dist/js': 'select2' },
+                    'zh-CN.js': { 'select2/dist/js/i18n': 'select2/i18n' },
                     'backgrid-select-all.min.js': { 'backgrid-select-all': 'backgrid-select-all' },
                     'moment.min.js': { 'moment/min': 'moment/js' },
                     'moment-timezone-with-data.min.js': { 'moment-timezone/builds': 'moment-timezone' },

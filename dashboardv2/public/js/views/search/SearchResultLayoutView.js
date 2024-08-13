@@ -277,12 +277,12 @@ define(['require',
                             saveState: false
                         },
                         visibilityControlOpts: {
-                            buttonTemplate: _.template("<button class='btn btn-action btn-sm pull-right'>Columns&nbsp<i class='fa fa-caret-down'></i></button>")
+                            buttonTemplate: _.template("<button class='btn btn-action btn-sm pull-right'>"+Utils.tt("Columns")+"&nbsp<i class='fa fa-caret-down'></i></button>")
                         },
                         el: this.ui.colManager
                     },
                     gridOpts: {
-                        emptyText: 'No Records found!',
+                        emptyText: Utils.tt('No Records found!'),
                         className: 'table table-hover backgrid table-quickMenu colSort'
                     },
                     sortOpts: {
@@ -496,9 +496,10 @@ define(['require',
                             that.pageTo = that.pageTo - that.limit;
                             that.pageFrom = (that.pageTo - that.limit) + 1;
                         }
-                        that.ui.pageRecordText.html("Showing  <u>" + that.searchCollection.models.length + " records</u> From " + that.pageFrom + " - " + that.pageTo);
+                        
+                        that.ui.pageRecordText.html(Utils.tt('Showing <u>{{=total}} records</u> From {{=pageFrom}} - {{=pageTo}}',{total:that.searchCollection.models.length,pageFrom:that.pageFrom,pageTo:that.pageTo}));
                         that.activePage = Math.round(that.pageTo / that.limit);
-                        that.ui.activePage.attr('title', "Page " + that.activePage);
+                        that.ui.activePage.attr('title', Utils.tt("Page {{=pageNo}}",{pageNo:that.activePage}));
                         that.ui.activePage.text(that.activePage);
                         that.renderTableLayoutView();
                         that.multiSelectEntity = [];
@@ -508,9 +509,9 @@ define(['require',
                         }
 
                         if (Utils.getUrlState.isSearchTab() && value && !that.profileDBView) {
-                            var searchString = 'Results for: <span class="filterQuery">' + CommonViewFunction.generateQueryOfFilter(that.value) + "</span>";
+                            var searchString = Utils.tt('Results for:') + '<span class="filterQuery">' + CommonViewFunction.generateQueryOfFilter(that.value) + "</span>";
                             if (Globals.entityCreate && Globals.entityTypeConfList && Utils.getUrlState.isSearchTab()) {
-                                searchString += "<p>If you do not find the entity in search result below then you can" + '<a href="javascript:void(0)" data-id="createEntity"> create new entity</a></p>';
+                                searchString += "<p>"+ Utils.tt('If you do not find the entity in search result below then you can') + '<a href="javascript:void(0)" data-id="createEntity"> '+Utils.tt('create new entity')+'</a></p>';
                             }
                             that.$('.searchResult').html(searchString);
                         }
@@ -683,7 +684,7 @@ define(['require',
                 }
                 col['Check'] = {
                     name: "selected",
-                    label: "Select",
+                    label: Utils.tt("Select"),
                     cell: "select-row",
                     resizeable: false,
                     orderable: false,
@@ -693,7 +694,7 @@ define(['require',
 
 
                 col['name'] = {
-                    label: this.value && this.profileDBView ? "Table Name" : "Name",
+                    label: Utils.tt(this.value && this.profileDBView ? "Table Name" : "Name"),
                     cell: "html",
                     editable: false,
                     resizeable: true,
@@ -765,7 +766,7 @@ define(['require',
                 };
 
                 col['owner'] = {
-                    label: "Owner",
+                    label: Utils.tt("Owner"),
                     cell: "String",
                     editable: false,
                     resizeable: true,
@@ -782,7 +783,7 @@ define(['require',
                 };
                 if (this.value && this.profileDBView) {
                     col['createTime'] = {
-                        label: "Date Created",
+                        label: Utils.tt("Date Created"),
                         cell: "Html",
                         editable: false,
                         formatter: _.extend({}, Backgrid.CellFormatter.prototype, {
@@ -799,7 +800,7 @@ define(['require',
                 }
                 if (this.value && !this.profileDBView) {
                     col['description'] = {
-                        label: "Description",
+                        label: Utils.tt("Description"),
                         cell: "String",
                         editable: false,
                         resizeable: true,
@@ -817,7 +818,7 @@ define(['require',
 
 
                     col['typeName'] = {
-                        label: "Type",
+                        label: Utils.tt("Type"),
                         cell: "Html",
                         editable: false,
                         resizeable: true,
@@ -895,7 +896,7 @@ define(['require',
                                     return;
                                 }
                                 col[obj.name] = {
-                                    label: Enums.systemAttributes[obj.name] ? Enums.systemAttributes[obj.name] : (_.escape(obj.isBusinessAttributes ? obj.name : obj.name.capitalize())),
+                                    label: Utils.tt(Enums.systemAttributes[obj.name] ? Enums.systemAttributes[obj.name] : (_.escape(obj.isBusinessAttributes ? obj.name : obj.name.capitalize()))),
                                     cell: "Html",
                                     headerCell: Backgrid.HeaderHTMLDecodeCell,
                                     editable: false,
@@ -1025,7 +1026,7 @@ define(['require',
                     col = options.col;
                 if (col) {
                     col['tag'] = {
-                        label: "Classifications",
+                        label: Utils.tt("Classifications"),
                         cell: "Html",
                         editable: false,
                         sortable: false,
@@ -1056,7 +1057,7 @@ define(['require',
                     col = options.col;
                 if (col) {
                     col['term'] = {
-                        label: "Term",
+                        label: Utils.tt("Term"),
                         cell: "Html",
                         editable: false,
                         sortable: false,

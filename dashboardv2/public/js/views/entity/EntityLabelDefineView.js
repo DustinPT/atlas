@@ -109,10 +109,11 @@ define(['require',
                 }
             };
             this.ui.addLabelOptions.select2({
-                placeholder: "Select Label",
+                placeholder: Utils.tt("Select Label"),
                 allowClear: false,
                 tags: true,
                 multiple: true,
+                language:'zh-CN',
                 ajax: {
                     url: UrlLinks.searchApiUrl('suggestions'),
                     dataType: 'json',

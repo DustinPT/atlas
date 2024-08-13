@@ -370,7 +370,7 @@ define(['require',
         },
         tagsCollection: function() {
             var that = this,
-                str = '<option selected="selected" disabled="disabled">-- Select a Classification from the dropdown list --</option>';
+                str = '<option selected="selected" disabled="disabled">'+Utils.tt('-- Select a Classification from the dropdown list --')+'</option>';
             this.tagCollection.fullCollection.each(function(obj, key) {
                 var name = Utils.getName(obj.toJSON(), 'name');
                 // using obj.get('name') insted of name variable because if html is presen in name then escaped name will not found in tagList.
@@ -602,7 +602,7 @@ define(['require',
                 success: function(data) {
                     var addupdatetext = that.tagModel ? 'updated successfully to ' : 'added to ';
                     Utils.notifySuccess({
-                        content: "Classification " + tagName + " has been " + addupdatetext + (that.entityCount > 1 ? "entities" : "entity")
+                        content: Utils.tt("Classification {{=tagName}} has been " + addupdatetext + (that.entityCount > 1 ? "entities" : "entity"),{tagName:tagName})
                     });
                     if (options.modalCollection) {
                         options.modalCollection.fetch({ reset: true });

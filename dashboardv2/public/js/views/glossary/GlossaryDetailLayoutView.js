@@ -346,7 +346,7 @@ define(['require',
                     categories = "";
                 _.each(data, function(val) {
                     var name = _.escape(val.displayText);
-                    categories += '<span data-guid="' + val.categoryGuid + '" class="btn btn-action btn-sm btn-icon btn-blue" data-id="categoryClick"><span>' + name + '</span><i class="fa fa-close" data-id="removeCategory" data-type="category" title="Remove Category"></i></span>';
+                    categories += '<span data-guid="' + val.categoryGuid + '" class="btn btn-action btn-sm btn-icon btn-blue" data-id="categoryClick"><span>' + name + '</span><i class="fa fa-close" data-id="removeCategory" data-type="category" title="'+Utils.tt('Remove Category')+'"></i></span>';
                 });
                 this.ui.categoryList.find("span.btn").remove();
                 this.ui.categoryList.prepend(categories);
@@ -356,7 +356,7 @@ define(['require',
                     terms = "";
                 _.each(data, function(val) {
                     var name = _.escape(val.displayText);
-                    terms += '<span data-guid="' + val.termGuid + '" class="btn btn-action btn-sm btn-icon btn-blue" data-id="termClick"><span>' + name + '</span><i class="fa fa-close" data-id="removeTerm" data-type="term" title="Remove Term"></i></span>';
+                    terms += '<span data-guid="' + val.termGuid + '" class="btn btn-action btn-sm btn-icon btn-blue" data-id="termClick"><span>' + name + '</span><i class="fa fa-close" data-id="removeTerm" data-type="term" title="'+Utils.tt('Remove Term')+'"></i></span>';
                 });
                 this.ui.termList.find("span.btn").remove();
                 this.ui.termList.prepend(terms);
@@ -368,7 +368,7 @@ define(['require',
                     propagatedTagListData = "";
                 _.each(tagObject, function(val) {
                     var parentName = that.getTagParentList(val.typeName);
-                    tagData += '<span class="btn btn-action btn-sm btn-icon btn-blue" data-id="tagClickTerm"><span title="' + parentName + '">' + _.escape(parentName) + '</span><i class="fa fa-close" data-id="removeTagTerm" data-type="tag" title="Remove Classification"></i></span>';
+                    tagData += '<span class="btn btn-action btn-sm btn-icon btn-blue" data-id="tagClickTerm"><span title="' + parentName + '">' + _.escape(parentName) + '</span><i class="fa fa-close" data-id="removeTagTerm" data-type="tag" title="'+Utils.tt('Remove Classification')+'"></i></span>';
                 });
                 this.ui.tagList.find("span.btn").remove();
                 this.ui.tagList.prepend(tagData);
@@ -471,10 +471,11 @@ define(['require',
                 var that = this,
                     tagName = $(e.currentTarget).text().split('@')[0],
                     termName = this.data.name;
+                
                 CommonViewFunction.deleteTag(_.extend({}, {
-                    msg: "<div class='ellipsis-with-margin'>Remove: " + "<b>" + _.escape(tagName) + "</b> assignment from <b>" + _.escape(termName) + "?</b></div>",
+                    msg: "<div class='ellipsis-with-margin'>" + Utils.tt("Remove: {{=tagName}} assignment from {{=termName}}?",{tagName:"<b>" + _.escape(tagName) +"</b>",termName:"<b>"+_.escape(termName)+"</b>"}) + "</div>",
                     titleMessage: Messages.removeTag,
-                    okText: "Remove",
+                    okText: Utils.tt("Remove"),
                     showLoader: that.showLoader.bind(that),
                     hideLoader: that.hideLoader.bind(that),
                     tagName: tagName,

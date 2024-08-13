@@ -16,14 +16,19 @@
  * limitations under the License.
  */
 
-define(['require'], function(require) {
+define(['require','modules/i18n'], function(require,i18n) {
     'use strict';
 
+    function tt() {
+        // i18n.get(key[, data, options][, lang]);
+        return i18n.get.apply(i18n, arguments);
+    }
+
     var Messages = {
-        defaultErrorMessage: "Something went wrong",
+        defaultErrorMessage: tt("Something went wrong"),
         addSuccessMessage: " created successfully",
         addErrorMessage: " could not be Created",
-        removeTag: "Remove Classification Assignment",
+        removeTag: tt("Remove Classification Assignment"),
         deleteSuccessMessage: " deleted successfully",
         deleteErrorMessage: " could not be deleted",
         removeSuccessMessage: " removed successfully",
@@ -36,22 +41,22 @@ define(['require'], function(require) {
         },
         search: {
             noRecordForPage: "No record found at ",
-            onSamePage: "You are on the same page!",
-            notExists: "Invalid Expression or Classification/Type has been deleted.",
+            onSamePage: tt("You are on the same page!"),
+            notExists: tt("Invalid Expression or Classification/Type has been deleted."),
             favoriteSearch: {
                 save: "Do you want to overwrite ",
-                notSelectedFavoriteElement: "Please select any one favorite search",
-                notSelectedSearchFilter: "Please select at least one filter"
+                notSelectedFavoriteElement: tt("Please select any one favorite search"),
+                notSelectedSearchFilter: tt("Please select at least one filter")
             }
         },
         tag: {
-            addAttributeSuccessMessage: "Classification attribute is added successfully",
-            updateTagDescriptionMessage: "Classification description is updated successfully"
+            addAttributeSuccessMessage: tt("Classification attribute is added successfully"),
+            updateTagDescriptionMessage: tt("Classification description is updated successfully")
         },
         glossary: {
-            removeTermfromCategory: "Remove Term Assignment",
-            removeTermfromEntity: "Remove Term Assignment",
-            removeCategoryfromTerm: "Remove Category Assignment"
+            removeTermfromCategory: tt("Remove Term Assignment"),
+            removeTermfromEntity: tt("Remove Term Assignment"),
+            removeCategoryfromTerm: tt("Remove Category Assignment")
         },
         getAbbreviationMsg: function(abbrev, type) {
             var msg = abbrev ? "s were" : " was";

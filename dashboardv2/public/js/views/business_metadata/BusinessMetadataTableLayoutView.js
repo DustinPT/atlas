@@ -182,9 +182,9 @@ define(['require',
                             isNewAttr: that.newAttr
                         });
                         if (isAttrEdit) {
-                            that.ui.businessMetadataAttrPageTitle.text("Update Attribute of: " + selectedBusinessMetadata.get('name'));
+                            that.ui.businessMetadataAttrPageTitle.text(Utils.tt("Update Attribute of: ") + selectedBusinessMetadata.get('name'));
                         } else {
-                            that.ui.businessMetadataAttrPageTitle.text("Add Business Metadata Attribute for: " + selectedBusinessMetadata.get('name'));
+                            that.ui.businessMetadataAttrPageTitle.text(Utils.tt("Add Business Metadata Attribute for: ") + selectedBusinessMetadata.get('name'));
                         }
 
                         that.RModal.show(that.view);
@@ -197,7 +197,7 @@ define(['require',
                 that.showDetails = false;
                 that.ui.businessMetadataAttrPageOk.text("Create");
                 that.ui.businessMetadataAttrPageOk.attr('data-action', 'createBusinessMetadata');
-                that.ui.businessMetadataAttrPageTitle.text("Create Business Metadata");
+                that.ui.businessMetadataAttrPageTitle.text(Utils.tt("Create Business Metadata"));
                 that.toggleBusinessMetadataDetailsAttrView();
                 require(["views/business_metadata/CreateBusinessMetadataLayoutView"], function(CreateBusinessMetadataLayoutView) {
                     that.view = new CreateBusinessMetadataLayoutView({
@@ -248,7 +248,7 @@ define(['require',
                             var attrValues = '',
                                 attrTable = $('table'),
                                 attrTableBody = $('tbody'),
-                                attrTableHeading = "<thead><td style='display:table-cell'><b>Attribute</b></td><td style='display:table-cell'><b>Type</b></td><td style='display:table-cell'><b>Search Weight</b></td><td style='display:table-cell'><b>Enable Multivalues</b></td><td style='display:table-cell'><b>Max Length</b></td><td style='display:table-cell'><b>Applicable Type(s)</b></td><td style='display:table-cell'><b>Action</b></td></thead>",
+                                attrTableHeading = "<thead><td style='display:table-cell'><b>"+Utils.tt("Attribute")+"</b></td><td style='display:table-cell'><b>"+Utils.tt("Type")+"</b></td><td style='display:table-cell'><b>"+Utils.tt("Search Weight")+"</b></td><td style='display:table-cell'><b>"+Utils.tt("Enable Multivalues")+"</b></td><td style='display:table-cell'><b>"+Utils.tt("Max Length")+"</b></td><td style='display:table-cell'><b>"+Utils.tt("Applicable Type(s)")+"</b></td><td style='display:table-cell'><b>"+Utils.tt("Action")+"</b></td></thead>",
                                 attrRow = '',
                                 attrTableDetails = '';
                             if (model.attributes && model.attributes.attributeDefs.length) {
@@ -271,12 +271,12 @@ define(['require',
                                         maxString = attrObj.options.maxStrLength;
                                     }
 
-                                    attrRow += "<tr> <td style='display:table-cell'>" + _.escape(attrObj.name) + "</td><td style='display:table-cell'>" + typeName + "</td><td style='display:table-cell'>" + _.escape(attrObj.searchWeight) + "</td><td style='display:table-cell'><input type='checkbox' class='form-check-input multi-value-select' " + multiSelect + " disabled='disabled'> </td><td style='display:table-cell'>" + maxString + "</td><td style='display:table-cell'>" + applicableEntityTypes + "</td><td style='display:table-cell'> <div class='btn btn-action btn-sm' style='margin-left:0px;' data-id='attributeEdit' data-guid='" + model.get('guid') + "' data-name ='" + _.escape(attrObj.name) + "' data-action='attributeEdit' >Edit</div> </td></tr> ";
+                                    attrRow += "<tr> <td style='display:table-cell'>" + _.escape(attrObj.name) + "</td><td style='display:table-cell'>" + typeName + "</td><td style='display:table-cell'>" + _.escape(attrObj.searchWeight) + "</td><td style='display:table-cell'><input type='checkbox' class='form-check-input multi-value-select' " + multiSelect + " disabled='disabled'> </td><td style='display:table-cell'>" + maxString + "</td><td style='display:table-cell'>" + applicableEntityTypes + "</td><td style='display:table-cell'> <div class='btn btn-action btn-sm' style='margin-left:0px;' data-id='attributeEdit' data-guid='" + model.get('guid') + "' data-name ='" + _.escape(attrObj.name) + "' data-action='attributeEdit' >"+Utils.tt("Edit")+"</div> </td></tr> ";
                                 });
                                 var adminText = '<div class="row"><div class="col-sm-12 attr-details"><table style="padding: 50px;">' + attrTableHeading + attrRow + '</table></div></div>';
                                 $(el).append($('<div>').html(adminText));
                             } else {
-                                var adminText = '<div class="row"><div class="col-sm-12 attr-details"><h5 class="text-center"> No attributes to show.</h5></div></div>';
+                                var adminText = '<div class="row"><div class="col-sm-12 attr-details"><h5 class="text-center"> '+Utils.tt('No attributes to show')+'</h5></div></div>';
                                 $(el).append($('<div>').html(adminText));
                             }
                         }
@@ -356,7 +356,7 @@ define(['require',
                         editable: false,
                         formatter: _.extend({}, Backgrid.CellFormatter.prototype, {
                             fromRaw: function(rawValue, model) {
-                                return "<button type='button' data-id='addAttribute' data-guid='" + model.get('guid') + "' class='btn btn-action btn-sm' style='margin-bottom: 10px;' data-action='createAttr' data-original-title='Add Business Metadata attribute'><i class='fa fa-plus'></i> Attributes</button>";
+                                return "<button type='button' data-id='addAttribute' data-guid='" + model.get('guid') + "' class='btn btn-action btn-sm' style='margin-bottom: 10px;' data-action='createAttr' data-original-title='Add Business Metadata attribute'><i class='fa fa-plus'></i> "+Utils.tt("Attributes")+"</button>";
                             }
                         })
                     }

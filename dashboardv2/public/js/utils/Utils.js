@@ -170,12 +170,12 @@ define(['require', 'utils/Globals', 'pnotify', 'utils/Messages', 'utils/Enums', 
             modal['stack'] = myStack;
         }
         notify(_.extend({
-            title: 'Confirmation',
+            title: Utils.tt('Confirmation'),
             hide: false,
             confirm: {
                 confirm: true,
                 buttons: [{
-                        text: options.cancelText || 'Cancel',
+                        text: Utils.tt(options.cancelText || 'Cancel'),
                         addClass: 'btn-action btn-md cancel',
                         click: function(notice) {
                             options.cancel(notice);
@@ -183,7 +183,7 @@ define(['require', 'utils/Globals', 'pnotify', 'utils/Messages', 'utils/Enums', 
                         }
                     },
                     {
-                        text: options.okText || 'Ok',
+                        text: Utils.tt(options.okText || 'Ok'),
                         addClass: 'btn-atlas btn-md ok',
                         click: function(notice) {
                             if (options.ok) {

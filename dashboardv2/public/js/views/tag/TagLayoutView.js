@@ -172,7 +172,7 @@ define(['require',
                 });
                 that.ui.treeLov.html(treeStr);
                 that.ui.treeLov.select2({
-                    placeholder: "Search Classification",
+                    placeholder: Utils.tt("Search Classification"),
                     allowClear: true
                 });
             },
@@ -394,11 +394,11 @@ define(['require',
                     var name = (!(nodeName == "BUTTON") ? that.query[that.viewType].tagName : null);
                     var view = new CreateTagLayoutView({ 'tagCollection': that.collection, 'selectedTag': name, 'enumDefCollection': enumDefCollection }),
                         modal = new Modal({
-                            title: 'Create a new classification',
+                            title: Utils.tt('Create a new classification'),
                             content: view,
-                            cancelText: "Cancel",
+                            cancelText: Utils.tt("Cancel"),
                             okCloses: false,
-                            okText: 'Create',
+                            okText: Utils.tt('Create'),
                             allowCancel: true,
                         }).open();
                     modal.$el.find('button.ok').attr("disabled", "true");
@@ -411,7 +411,7 @@ define(['require',
                     modal.on('shownModal', function() {
                         view.ui.parentTag.select2({
                             multiple: true,
-                            placeholder: "Search Classification",
+                            placeholder: Utils.tt("Search Classification"),
                             allowClear: true
                         });
                     });
@@ -579,9 +579,9 @@ define(['require',
                     popoverOptions: {
                         content: function() {
                             return "<ul>" +
-                                "<li class='listTerm' ><i class='fa fa-search'></i> <a href='javascript:void(0)' data-fn='onSearchTag'>Search Classification</a></li>" +
-                                "<li class='listTerm' ><i class='fa fa-plus'></i> <a href='javascript:void(0)' data-fn='onClickCreateTag'>Create Sub-classification</a></li>" +
-                                "<li class='listTerm' ><i class='fa fa-trash-o'></i> <a href='javascript:void(0)' data-fn='onDeleteTag'>Delete Classification</a></li>" +
+                                "<li class='listTerm' ><i class='fa fa-search'></i> <a href='javascript:void(0)' data-fn='onSearchTag'>"+Utils.tt("Search Classification")+"</a></li>" +
+                                "<li class='listTerm' ><i class='fa fa-plus'></i> <a href='javascript:void(0)' data-fn='onClickCreateTag'>"+Utils.tt("Create Sub-classification")+"</a></li>" +
+                                "<li class='listTerm' ><i class='fa fa-trash-o'></i> <a href='javascript:void(0)' data-fn='onDeleteTag'>"+Utils.tt("Delete Classification")+"</a></li>" +
                                 "</ul>";
                         }
                     }

@@ -19,18 +19,18 @@
         <div class="panel-heading" data-toggle="collapse" href="#collapse1" aria-expanded="true" style="width: 58%">
             <h4 class="panel-title">
                 {{#ifCond isRelationshipDetailPage "!==" true}}
-                <a>Technical properties </a>
+                <a>{{tt 'Technical properties'}}} </a>
                 {{else}}
-                <a>Relationship properties </a>
+                <a>{{tt 'Relationship properties'}} </a>
                 {{/ifCond}}
             </h4>
             <div class="btn-group pull-left">
-                <button type="button" title="Collapse"><i class="ec-icon fa"></i></button>
+                <button type="button" title="{{tt 'Collapse'}}"><i class="ec-icon fa"></i></button>
             </div>
         </div>
         <div class="panel-actions">
             <div class="pretty p-switch p-fill" style="margin-right: 20px">
-                <input type="checkbox" data-id="noValueToggle" title="Show empty values" />
+                <input type="checkbox" data-id="noValueToggle" title="{{tt 'Show empty values'}}" />
                 {{#ifCond isRelationshipDetailPage "!==" true}}
                 <div class="state p-primary">
                     <label></label>
@@ -38,7 +38,7 @@
                 {{/ifCond}}
             </div>
             {{#ifCond editEntity "===" true}}
-            <button data-id="editButton" title="Edit Entity" class="btn btn-action btn-sm pull-right">Edit</button>
+            <button data-id="editButton" title="{{tt 'Edit Entity'}}" class="btn btn-action btn-sm pull-right">{{tt 'Edit'}}</button>
             {{/ifCond}}
         </div>
         <div id="collapse1" class="panel-collapse collapse in">

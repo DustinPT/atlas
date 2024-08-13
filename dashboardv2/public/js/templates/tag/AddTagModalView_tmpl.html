@@ -29,18 +29,18 @@
             <div class="col-md-12 addtag-propagte-box">
                 <div class="inline">
                     <label class="checkbox-inline btn">
-                        <input type="checkbox" data-id="checkModalTagProperty" class="input" checked /> Propagate</label>
+                        <input type="checkbox" data-id="checkModalTagProperty" class="input" checked /> {{tt 'Propagate'}}</label>
                 </div>
                 <div class="inline" data-id="removePropagationOnEntityDeleteBox">
                     <label class="checkbox-inline btn">
-                        <input type="checkbox" data-id="removePropagationOnEntityDelete" class="input" title="Propagated classification are removed during entity delete" /> Remove propagation on entity delete</label>
+                        <input type="checkbox" data-id="removePropagationOnEntityDelete" class="input" title="{{tt 'Propagated classification are removed during entity delete'}}" /> {{tt 'Remove propagation on entity delete'}}</label>
                 </div>
             </div>
         </div>
         <div class="col-md-6">
             <div class="inline">
                 <label class="checkbox-inline btn">
-                    <input type="checkbox" data-id="checkTimezoneProperty" class="input" /> Apply Validity Period</label>
+                    <input type="checkbox" data-id="checkTimezoneProperty" class="input" /> {{tt 'Apply Validity Period'}}</label>
             </div>
         </div>
     </div>
@@ -48,7 +48,7 @@
         <hr>
         <div class="col-sm-12">
             <div class="clearfix form-group">
-                <button type="button" class="btn btn-action btn-sm pull-right" data-id="addTimezoneParms"><i class="fa fa-plus"></i> Add Validity Period</button>
+                <button type="button" class="btn btn-action btn-sm pull-right" data-id="addTimezoneParms"><i class="fa fa-plus"></i> {{tt 'Add Validity Period'}}</button>
             </div>
             <div class="panel panel-default" data-id="validityPeriodBody" style="display: none;">
                 <div class="panel-body" data-id="addTimezoneDiv">
@@ -64,8 +64,8 @@
         </div>
     </div>
     <div class="col-sm-12" style="display:none">
-        <p>Classification Attributes(optional)</p>
-        <p class="text-gray">Add attribute values for this classification</p>
+        <p>{{tt 'Classification Attributes(optional)'}}</p>
+        <p class="text-gray">{{tt 'Add attribute values for this classification'}}</p>
         <div data-id="tagAttribute"></div>
     </div>
 </div>
