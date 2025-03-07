@@ -847,14 +847,14 @@
                 <enabled>false</enabled>
             </snapshots>
         </repository>
-        <repository>
-            <id>hortonworks.repo</id>
-            <url>https://repo.hortonworks.com/content/repositories/releases</url>
-            <name>Hortonworks Repo</name>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
-        </repository>
+<!--        <repository>-->
+<!--            <id>hortonworks.repo</id>-->
+<!--            <url>https://repo.hortonworks.com/content/repositories/releases</url>-->
+<!--            <name>Hortonworks Repo</name>-->
+<!--            <snapshots>-->
+<!--                <enabled>false</enabled>-->
+<!--            </snapshots>-->
+<!--        </repository>-->
         <repository>
             <id>apache.snapshots.repo</id>
             <url>https://repository.apache.org/content/groups/snapshots</url>

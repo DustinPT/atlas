@@ -64,21 +64,20 @@ define(['require',
                 if(this.relationship){
                     this.filterType = 'relationshipFilters';
                 }
-                this.dateRangesMap = {
-                    [Utils.tt('Today')]: [moment(), moment()],
-                    [Utils.tt('Yesterday')]: [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
-                    [Utils.tt('Last 7 Days')]: [moment().subtract(6, 'days'), moment()],
-                    [Utils.tt('Last 30 Days')]: [moment().subtract(29, 'days'), moment()],
-                    [Utils.tt('This Month')]: [moment().startOf('month'), moment().endOf('month')],
-                    [Utils.tt('Last Month')]: [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')],
-                    [Utils.tt('Last 3 Months')]: [moment().subtract(3, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')],
-                    [Utils.tt('Last 6 Months')]: [moment().subtract(6, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')],
-                    [Utils.tt('Last 12 Months')]: [moment().subtract(12, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')],
-                    [Utils.tt('This Quarter')]: [moment().startOf('quarter'), moment().endOf('quarter')],
-                    [Utils.tt('Last Quarter')]: [moment().subtract(1, 'quarter').startOf('quarter'), moment().subtract(1, 'quarter').endOf('quarter')],
-                    [Utils.tt('This Year')]: [moment().startOf('year'), moment().endOf('year')],
-                    [Utils.tt('Last Year')]: [moment().subtract(1, 'year').startOf('year'), moment().subtract(1, 'year').endOf('year')]
-                }
+                this.dateRangesMap = {}
+                this.dateRangesMap[Utils.tt('Today')] = [moment(), moment()]
+                this.dateRangesMap[Utils.tt('Yesterday')] = [moment().subtract(1, 'days'), moment().subtract(1, 'days')]
+                this.dateRangesMap[Utils.tt('Last 7 Days')] = [moment().subtract(6, 'days'), moment()]
+                this.dateRangesMap[Utils.tt('Last 30 Days')] = [moment().subtract(29, 'days'), moment()]
+                this.dateRangesMap[Utils.tt('This Month')] = [moment().startOf('month'), moment().endOf('month')]
+                this.dateRangesMap[Utils.tt('Last Month')] = [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+                this.dateRangesMap[Utils.tt('Last 3 Months')] = [moment().subtract(3, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+                this.dateRangesMap[Utils.tt('Last 6 Months')] = [moment().subtract(6, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+                this.dateRangesMap[Utils.tt('Last 12 Months')] = [moment().subtract(12, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+                this.dateRangesMap[Utils.tt('This Quarter')] = [moment().startOf('quarter'), moment().endOf('quarter')]
+                this.dateRangesMap[Utils.tt('Last Quarter')] = [moment().subtract(1, 'quarter').startOf('quarter'), moment().subtract(1, 'quarter').endOf('quarter')]
+                this.dateRangesMap[Utils.tt('This Year')] = [moment().startOf('year'), moment().endOf('year')]
+                this.dateRangesMap[Utils.tt('Last Year')] = [moment().subtract(1, 'year').startOf('year'), moment().subtract(1, 'year').endOf('year')]
             },
             bindEvents: function() {},
             getOperator: function(type, skipDefault) {

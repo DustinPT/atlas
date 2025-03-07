@@ -29,11 +29,7 @@ import org.keycloak.adapters.springsecurity.AdapterDeploymentContextFactoryBean;
 import org.keycloak.adapters.springsecurity.KeycloakConfiguration;
 import org.keycloak.adapters.springsecurity.authentication.KeycloakAuthenticationEntryPoint;
 import org.keycloak.adapters.springsecurity.authentication.KeycloakLogoutHandler;
-import org.keycloak.adapters.springsecurity.filter.KeycloakAuthenticatedActionsFilter;
-import org.keycloak.adapters.springsecurity.filter.KeycloakAuthenticationProcessingFilter;
-import org.keycloak.adapters.springsecurity.filter.KeycloakPreAuthActionsFilter;
-import org.keycloak.adapters.springsecurity.filter.KeycloakSecurityContextRequestFilter;
-import org.keycloak.adapters.springsecurity.filter.QueryParamPresenceRequestMatcher;
+import org.keycloak.adapters.springsecurity.filter.*;
 import org.keycloak.adapters.springsecurity.management.HttpSessionManager;
 import org.keycloak.representations.adapters.config.AdapterConfig;
 import org.slf4j.Logger;
@@ -43,7 +39,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.core.io.Resource;
-import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -52,15 +47,9 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.annotation.web.configurers.HeadersConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
-import org.springframework.security.config.oauth2.client.CommonOAuth2Provider;
 import org.springframework.security.core.session.SessionRegistryImpl;
-import org.springframework.security.oauth2.client.InMemoryOAuth2AuthorizedClientService;
-import org.springframework.security.oauth2.client.OAuth2AuthorizedClientService;
 import org.springframework.security.oauth2.client.registration.ClientRegistration;
-import org.springframework.security.oauth2.client.registration.ClientRegistrationRepository;
 import org.springframework.security.oauth2.client.registration.InMemoryClientRegistrationRepository;
-import org.springframework.security.oauth2.client.web.AuthenticatedPrincipalOAuth2AuthorizedClientRepository;
-import org.springframework.security.oauth2.client.web.OAuth2AuthorizedClientRepository;
 import org.springframework.security.oauth2.core.AuthorizationGrantType;
 import org.springframework.security.oauth2.core.ClientAuthenticationMethod;
 import org.springframework.security.web.AuthenticationEntryPoint;
@@ -68,22 +57,19 @@ import org.springframework.security.web.authentication.DelegatingAuthenticationE
 import org.springframework.security.web.authentication.logout.LogoutFilter;
 import org.springframework.security.web.authentication.session.RegisterSessionAuthenticationStrategy;
 import org.springframework.security.web.authentication.session.SessionAuthenticationStrategy;
-import org.springframework.security.web.authentication.www.BasicAuthenticationEntryPoint;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
+import org.springframework.security.web.header.writers.StaticHeadersWriter;
 import org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.security.web.util.matcher.OrRequestMatcher;
 import org.springframework.security.web.util.matcher.RequestHeaderRequestMatcher;
 import org.springframework.security.web.util.matcher.RequestMatcher;
-import org.springframework.security.web.header.writers.StaticHeadersWriter;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 import javax.inject.Inject;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
+import java.time.Duration;
+import java.util.*;
 
 import static org.apache.atlas.AtlasConstants.ATLAS_MIGRATION_MODE_FILENAME;
 import static org.apache.atlas.web.filters.HeadersUtil.SERVER_KEY;
@@ -115,7 +101,7 @@ public class AtlasSecurityConfig extends WebSecurityConfigurerAdapter {
     private KeycloakConfigResolver keycloakConfigResolver;
 
     private final boolean keycloakEnabled;
-    
+
     private final boolean oauth2Enabled;
 
     @Inject
@@ -141,8 +127,8 @@ public class AtlasSecurityConfig extends WebSecurityConfigurerAdapter {
         this.activeServerFilter = activeServerFilter;
 
         this.keycloakEnabled = configuration.getBoolean(AtlasAuthenticationProvider.KEYCLOAK_AUTH_METHOD, false);
-        this.oauth2Enabled=configuration.getBoolean("atlas.authentication.method.oauth2", false);
-        
+        this.oauth2Enabled = configuration.getBoolean("atlas.authentication.method.oauth2", false);
+
     }
 
     public AuthenticationEntryPoint getAuthenticationEntryPoint() throws Exception {
@@ -178,16 +164,16 @@ public class AtlasSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     public void configure(WebSecurity web) throws Exception {
         List<String> matchers = new ArrayList<>(
-          Arrays.asList("/css/**","/n/css/**",
-            "/img/**",
-            "/n/img/**",
-            "/libs/**",
-            "/n/libs/**",
-            "/js/**",
-            "/n/js/**",
-            "/ieerror.html",
-            "/migration-status.html",
-            "/api/atlas/admin/status"));
+                Arrays.asList("/css/**", "/n/css/**",
+                        "/img/**",
+                        "/n/img/**",
+                        "/libs/**",
+                        "/n/libs/**",
+                        "/js/**",
+                        "/n/js/**",
+                        "/ieerror.html",
+                        "/migration-status.html",
+                        "/api/atlas/admin/status"));
 
         if (!keycloakEnabled) {
             matchers.add("/login.jsp");
@@ -239,7 +225,7 @@ public class AtlasSecurityConfig extends WebSecurityConfigurerAdapter {
         boolean configMigrationEnabled = !StringUtils.isEmpty(configuration.getString(ATLAS_MIGRATION_MODE_FILENAME));
         if (configuration.getBoolean("atlas.server.ha.enabled", false) ||
                 configMigrationEnabled) {
-            if(configMigrationEnabled) {
+            if (configMigrationEnabled) {
                 LOG.info("Atlas is in Migration Mode, enabling ActiveServerFilter");
             } else {
                 LOG.info("Atlas is in HA Mode, enabling ActiveServerFilter");
@@ -254,15 +240,20 @@ public class AtlasSecurityConfig extends WebSecurityConfigurerAdapter {
 
         if (keycloakEnabled) {
             httpSecurity
-              .logout().addLogoutHandler(keycloakLogoutHandler()).and()
-              .addFilterBefore(keycloakAuthenticationProcessingFilter(), BasicAuthenticationFilter.class)
-              .addFilterBefore(keycloakPreAuthActionsFilter(), LogoutFilter.class)
-              .addFilterAfter(keycloakSecurityContextRequestFilter(), SecurityContextHolderAwareRequestFilter.class)
-              .addFilterAfter(keycloakAuthenticatedActionsRequestFilter(), KeycloakSecurityContextRequestFilter.class);
+                    .logout().addLogoutHandler(keycloakLogoutHandler()).and()
+                    .addFilterBefore(keycloakAuthenticationProcessingFilter(), BasicAuthenticationFilter.class)
+                    .addFilterBefore(keycloakPreAuthActionsFilter(), LogoutFilter.class)
+                    .addFilterAfter(keycloakSecurityContextRequestFilter(), SecurityContextHolderAwareRequestFilter.class)
+                    .addFilterAfter(keycloakAuthenticatedActionsRequestFilter(), KeycloakSecurityContextRequestFilter.class);
         }
-        if(oauth2Enabled){
+        if (oauth2Enabled) {
             httpSecurity.oauth2Login()
                     .clientRegistrationRepository(new InMemoryClientRegistrationRepository(oauth2ClientRegistration()));
+        }
+        boolean corsEnabled = configuration.getBoolean("atlas.cors.enabled", false);
+        LOG.info("CORS is {}", corsEnabled ? "enabled" : "disabled");
+        if (corsEnabled) {
+            httpSecurity.cors().configurationSource(corsConfigurationSource());
         }
     }
 
@@ -286,7 +277,7 @@ public class AtlasSecurityConfig extends WebSecurityConfigurerAdapter {
             cfg.setAuthServerUrl(conf.getString("auth-server-url", "https://localhost/auth"));
             cfg.setResource(conf.getString("resource", "none"));
 
-            Map<String,Object> credentials = new HashMap<>();
+            Map<String, Object> credentials = new HashMap<>();
             credentials.put("secret", conf.getString("credentials-secret", "nosecret"));
             cfg.setCredentials(credentials);
             KeycloakDeployment dep = KeycloakDeploymentBuilder.build(cfg);
@@ -350,7 +341,7 @@ public class AtlasSecurityConfig extends WebSecurityConfigurerAdapter {
 //    }
 
     private ClientRegistration oauth2ClientRegistration() {
-        Configuration clientConf=configuration.subset("atlas.authentication.method.oauth2.client_registration");
+        Configuration clientConf = configuration.subset("atlas.authentication.method.oauth2.client_registration");
         ClientRegistration.Builder builder = ClientRegistration.withRegistrationId(clientConf.getString("registration_id"));
         builder.clientAuthenticationMethod(ClientAuthenticationMethod.CLIENT_SECRET_BASIC);
         builder.authorizationGrantType(AuthorizationGrantType.AUTHORIZATION_CODE);
@@ -364,5 +355,34 @@ public class AtlasSecurityConfig extends WebSecurityConfigurerAdapter {
         builder.clientId(clientConf.getString("client_id"));
         builder.clientSecret(clientConf.getString("client_secret"));
         return builder.build();
+    }
+
+    UrlBasedCorsConfigurationSource corsConfigurationSource() {
+        Configuration corsConf = this.configuration.subset("atlas.cors");
+        CorsConfiguration configuration = new CorsConfiguration();
+        String allowedOrigins = corsConf.getString("allowed-origins");
+        if (StringUtils.isNotEmpty(allowedOrigins)) {
+            configuration.setAllowedOrigins(Arrays.asList(allowedOrigins.split(",")));
+        }
+        String allowedMethods = corsConf.getString("allowed-methods");
+        if (StringUtils.isNotEmpty(allowedMethods)) {
+            configuration.setAllowedMethods(Arrays.asList(allowedMethods.split(",")));
+        }
+        String allowedHeaders = corsConf.getString("allowed-headers");
+        if (StringUtils.isNotEmpty(allowedHeaders)) {
+            configuration.setAllowedHeaders(Arrays.asList(allowedHeaders.split(",")));
+        }
+        String exposedHeaders = corsConf.getString("exposed-headers");
+        if (StringUtils.isNotEmpty(exposedHeaders)) {
+            configuration.setExposedHeaders(Arrays.asList(exposedHeaders.split(",")));
+        }
+        configuration.setAllowCredentials(corsConf.getBoolean("allow-credentials", false));
+        String maxAge = corsConf.getString("max-age");
+        if (StringUtils.isNotEmpty(maxAge)) {
+            configuration.setMaxAge(Duration.parse(maxAge));
+        }
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**", configuration);
+        return source;
     }
 }
